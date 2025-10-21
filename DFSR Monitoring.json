@@ -11,7 +11,7 @@
             {
                 "uuid": "94a26e269a204a9c8bf000d8c7a6e3da",
                 "template": "Template App DFS Replication",
-                "name": "DFS Replication v1.0.3 (by Perlestius)",
+                "name": "DFS Replication",
                 "groups": [
                     {
                         "name": "Templates"
