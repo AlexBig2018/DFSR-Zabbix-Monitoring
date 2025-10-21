@@ -1,0 +1,2200 @@
+{
+    "zabbix_export": {
+        "version": "7.4",
+        "template_groups": [
+            {
+                "uuid": "7df96b18c230490a9a0a9e2307226338",
+                "name": "Templates"
+            }
+        ],
+        "templates": [
+            {
+                "uuid": "94a26e269a204a9c8bf000d8c7a6e3da",
+                "template": "Template App DFS Replication",
+                "name": "DFS Replication v1.0.3 (by Perlestius)",
+                "groups": [
+                    {
+                        "name": "Templates"
+                    }
+                ],
+                "items": [
+                    {
+                        "uuid": "6f71f182936448949e535d097b11fefb",
+                        "name": "DFSR Event Log: number of the last critical events",
+                        "key": "dfsr.params[Log,CritCount,{$DFSRLOG_PERIOD}]",
+                        "delay": "900",
+                        "history": "7d",
+                        "tags": [
+                            {
+                                "tag": "Application",
+                                "value": "DFS Replication General"
+                            },
+                            {
+                                "tag": "Application",
+                                "value": "DFS Replication Log"
+                            }
+                        ],
+                        "triggers": [
+                            {
+                                "uuid": "52cd26c28bab455794699ddb204bff5e",
+                                "expression": "last(/Template App DFS Replication/dfsr.params[Log,CritCount,{$DFSRLOG_PERIOD}])>{$DFSRLOGCRITICAL_MAX}",
+                                "name": "DFSR Event Log: number of critical errors in the last {$DFSRLOG_PERIOD} > {$DFSRLOGCRITICAL_MAX} (errors={ITEM.LASTVALUE})",
+                                "priority": "HIGH"
+                            }
+                        ]
+                    },
+                    {
+                        "uuid": "63e611ee3efb4aee9f2f0d0bd8b67053",
+                        "name": "DFSR Event Log: number of the last error events",
+                        "key": "dfsr.params[Log,ErrCount,{$DFSRLOG_PERIOD}]",
+                        "delay": "900",
+                        "history": "7d",
+                        "tags": [
+                            {
+                                "tag": "Application",
+                                "value": "DFS Replication General"
+                            },
+                            {
+                                "tag": "Application",
+                                "value": "DFS Replication Log"
+                            }
+                        ],
+                        "triggers": [
+                            {
+                                "uuid": "cedcf34d711e4e07bd834bf2edcc6111",
+                                "expression": "last(/Template App DFS Replication/dfsr.params[Log,ErrCount,{$DFSRLOG_PERIOD}])>{$DFSRLOGERRORS_MAX}",
+                                "name": "DFSR Event Log: number of errors in the last {$DFSRLOG_PERIOD} > {$DFSRLOGERRORS_MAX} (errors={ITEM.LASTVALUE})",
+                                "priority": "AVERAGE"
+                            }
+                        ]
+                    },
+                    {
+                        "uuid": "950f9c3aa49547ebaff6335ac2558157",
+                        "name": "DFSR Event Log: number of the last warning events",
+                        "key": "dfsr.params[Log,WarnCount,{$DFSRLOG_PERIOD}]",
+                        "delay": "900",
+                        "history": "7d",
+                        "tags": [
+                            {
+                                "tag": "Application",
+                                "value": "DFS Replication General"
+                            },
+                            {
+                                "tag": "Application",
+                                "value": "DFS Replication Log"
+                            }
+                        ],
+                        "triggers": [
+                            {
+                                "uuid": "3e58c3b4c518477db89d0b3dc9c336d8",
+                                "expression": "last(/Template App DFS Replication/dfsr.params[Log,WarnCount,{$DFSRLOG_PERIOD}])>{$DFSRLOGWARNINGS_MAX}",
+                                "name": "DFSR Event Log: number of warnings in the last {$DFSRLOG_PERIOD} > {$DFSRLOGWARNINGS_MAX} (warnings={ITEM.LASTVALUE})",
+                                "priority": "WARNING"
+                            }
+                        ]
+                    },
+                    {
+                        "uuid": "e2b4c4c20c0e4f8988b7fbc2f41921f5",
+                        "name": "DFSR Monitoring Provider Version",
+                        "key": "dfsr.params[MonProvVer]",
+                        "delay": "3600",
+                        "history": "7d",
+                        "value_type": "CHAR",
+                        "status": "DISABLED",
+                        "tags": [
+                            {
+                                "tag": "Application",
+                                "value": "DFS Replication General"
+                            }
+                        ],
+                        "triggers": [
+                            {
+                                "uuid": "9980a889311b40dc89612cab55cd5a7b",
+                                "expression": "(last(/Template App DFS Replication/dfsr.params[MonProvVer],#1)<>last(/Template App DFS Replication/dfsr.params[MonProvVer],#2))>0",
+                                "name": "DFSR Monitoring Provider Version was changed",
+                                "priority": "WARNING"
+                            }
+                        ]
+                    },
+                    {
+                        "uuid": "6bbed1764eff430eb1a7a6a1492a8d46",
+                        "name": "DFSR Provider Version",
+                        "key": "dfsr.params[ProvVer]",
+                        "delay": "3600",
+                        "history": "7d",
+                        "value_type": "CHAR",
+                        "status": "DISABLED",
+                        "tags": [
+                            {
+                                "tag": "Application",
+                                "value": "DFS Replication General"
+                            }
+                        ],
+                        "triggers": [
+                            {
+                                "uuid": "c40d8aea55954f17adcabfc6e30d77a4",
+                                "expression": "(last(/Template App DFS Replication/dfsr.params[ProvVer],#1)<>last(/Template App DFS Replication/dfsr.params[ProvVer],#2))>0",
+                                "name": "DFSR Provider Version was changed",
+                                "priority": "WARNING"
+                            }
+                        ]
+                    },
+                    {
+                        "uuid": "8e034330566346669b44f2aed637e755",
+                        "name": "Number of replication groups",
+                        "key": "dfsr.params[RGCount]",
+                        "delay": "900",
+                        "history": "7d",
+                        "tags": [
+                            {
+                                "tag": "Application",
+                                "value": "DFS Replication General"
+                            },
+                            {
+                                "tag": "Application",
+                                "value": "DFS Replication Groups"
+                            }
+                        ],
+                        "triggers": [
+                            {
+                                "uuid": "3b4bd6c48ab64c92970f4b9cebf9138f",
+                                "expression": "last(/Template App DFS Replication/dfsr.params[RGCount])=0",
+                                "name": "There are no replication groups for the server",
+                                "priority": "INFO"
+                            },
+                            {
+                                "uuid": "bb5ce525e16e4ad7b97a8c487bc57e25",
+                                "expression": "change(/Template App DFS Replication/dfsr.params[RGCount])<0",
+                                "name": "The server was excluded from one or more RGs",
+                                "priority": "WARNING"
+                            }
+                        ]
+                    },
+                    {
+                        "uuid": "933e0074bc804482b97ee747b3dbe222",
+                        "name": "DFS Replication role installed",
+                        "key": "dfsr.params[RoleInstalled]",
+                        "delay": "3600",
+                        "history": "7d",
+                        "preprocessing": [
+                            {
+                                "type": "BOOL_TO_DECIMAL"
+                            }
+                        ],
+                        "tags": [
+                            {
+                                "tag": "Application",
+                                "value": "DFS Replication General"
+                            }
+                        ],
+                        "triggers": [
+                            {
+                                "uuid": "7b619b86cefa47f8830f13007d6aeecc",
+                                "expression": "last(/Template App DFS Replication/dfsr.params[RoleInstalled])=0",
+                                "name": "DFS Replication role not installed",
+                                "priority": "HIGH"
+                            }
+                        ]
+                    },
+                    {
+                        "uuid": "c41cf61022d94ddab7da5e5eae37df93",
+                        "name": "DFS Replication service state",
+                        "key": "dfsr.params[ServiceState]",
+                        "delay": "300",
+                        "history": "7d",
+                        "description": "Service Starting (0)\nService Running (1)\nService Degraded (2)\nService Shutting Down (3)\nStopped (100)\nNot Found (101)",
+                        "valuemap": {
+                            "name": "DFSR::ServiceState"
+                        },
+                        "tags": [
+                            {
+                                "tag": "Application",
+                                "value": "DFS Replication General"
+                            }
+                        ],
+                        "triggers": [
+                            {
+                                "uuid": "6320409c77b04cc6b74b20fd529f9a8d",
+                                "expression": "last(/Template App DFS Replication/dfsr.params[ServiceState])=101",
+                                "name": "DFS Replication service not found",
+                                "priority": "HIGH"
+                            },
+                            {
+                                "uuid": "8bf84079d2f64145b520d3b42e1965ea",
+                                "expression": "last(/Template App DFS Replication/dfsr.params[ServiceState])=100",
+                                "name": "DFS Replication service stopped",
+                                "priority": "HIGH"
+                            },
+                            {
+                                "uuid": "94eb9969f89149c39c2c7c7e1bcd3151",
+                                "expression": "last(/Template App DFS Replication/dfsr.params[ServiceState])=2",
+                                "name": "State of DFS Replication service became 'Degraded'",
+                                "url": "https://docs.microsoft.com/en-us/previous-versions/windows/desktop/dfsr/images/service-state.png",
+                                "priority": "HIGH"
+                            }
+                        ]
+                    },
+                    {
+                        "uuid": "5e4f67fac3664954910dd6d1e2f1b9c5",
+                        "name": "DFS Replication service uptime",
+                        "key": "dfsr.params[ServiceUptime]",
+                        "delay": "60",
+                        "history": "7d",
+                        "value_type": "FLOAT",
+                        "units": "uptime",
+                        "tags": [
+                            {
+                                "tag": "Application",
+                                "value": "DFS Replication General"
+                            }
+                        ]
+                    },
+                    {
+                        "uuid": "373af508f8e84062befb4e337e7fd0f2",
+                        "name": "DFSR Service Version",
+                        "key": "dfsr.params[ServiceVer]",
+                        "delay": "3600",
+                        "history": "7d",
+                        "value_type": "CHAR",
+                        "tags": [
+                            {
+                                "tag": "Application",
+                                "value": "DFS Replication General"
+                            }
+                        ],
+                        "triggers": [
+                            {
+                                "uuid": "c134deff0a7b4ccf8ee59d1b4b2c106d",
+                                "expression": "(last(/Template App DFS Replication/dfsr.params[ServiceVer],#1)<>last(/Template App DFS Replication/dfsr.params[ServiceVer],#2))>0",
+                                "name": "DFSR Service Version was changed",
+                                "priority": "WARNING"
+                            }
+                        ]
+                    }
+                ],
+                "discovery_rules": [
+                    {
+                        "uuid": "5b48abe87e344627b519289f97a04727",
+                        "name": "DFS Replication Connections LLD",
+                        "key": "dfsr.discovery[Connection]",
+                        "delay": "3600",
+                        "lifetime": "1d",
+                        "enabled_lifetime_type": "DISABLE_NEVER",
+                        "item_prototypes": [
+                            {
+                                "uuid": "a564f58f5ad34a50bfe21d2a9e5fbbac",
+                                "name": "RG '{#RGNAME}': connection '{#SSERVERNAME}>{#RSERVERNAME}' blank schedule",
+                                "key": "dfsr.params[Connection,{#CONNECTIONID},BlankSchedule]",
+                                "delay": "900",
+                                "history": "7d",
+                                "preprocessing": [
+                                    {
+                                        "type": "BOOL_TO_DECIMAL"
+                                    }
+                                ],
+                                "tags": [
+                                    {
+                                        "tag": "Application",
+                                        "value": "DFS Replication Connections"
+                                    },
+                                    {
+                                        "tag": "Application",
+                                        "value": "DFS Replication Groups"
+                                    }
+                                ],
+                                "trigger_prototypes": [
+                                    {
+                                        "uuid": "cccb6f8baba045d3b136dda052a046d6",
+                                        "expression": "last(/Template App DFS Replication/dfsr.params[Connection,{#CONNECTIONID},BlankSchedule])=1",
+                                        "name": "RG '{#RGNAME}': connection '{#SSERVERNAME}>{#RSERVERNAME}' was disabled by schedule",
+                                        "url": "https://docs.microsoft.com/en-us/powershell/module/dfsr/set-dfsrconnectionschedule?view=win10-ps",
+                                        "priority": "INFO",
+                                        "description": "Distributed File System (DFS) Replication connections are the logical partnerships between members in a replication group. The DFS Replication service uses the Remote Procedure Call (RPC) protocol to communicate between servers. By default, DFS Replication creates connections with the recommended schedule and bandwidth configuration: full bandwidth, and 24 hours per day, seven days per week availability."
+                                    }
+                                ]
+                            },
+                            {
+                                "uuid": "94215c4ad5a74828bd0b62a7bdd175d3",
+                                "name": "RG '{#RGNAME}': connection '{#SSERVERNAME}>{#RSERVERNAME}' enabled",
+                                "key": "dfsr.params[Connection,{#CONNECTIONID},Enabled]",
+                                "delay": "900",
+                                "history": "7d",
+                                "preprocessing": [
+                                    {
+                                        "type": "BOOL_TO_DECIMAL"
+                                    }
+                                ],
+                                "tags": [
+                                    {
+                                        "tag": "Application",
+                                        "value": "DFS Replication Connections"
+                                    },
+                                    {
+                                        "tag": "Application",
+                                        "value": "DFS Replication Groups"
+                                    }
+                                ],
+                                "trigger_prototypes": [
+                                    {
+                                        "uuid": "f35a842e9be842c4a6c35ee1209b0a4e",
+                                        "expression": "last(/Template App DFS Replication/dfsr.params[Connection,{#CONNECTIONID},Enabled])=0",
+                                        "name": "RG '{#RGNAME}': connection '{#SSERVERNAME}>{#RSERVERNAME}' was disabled",
+                                        "priority": "WARNING",
+                                        "description": "You can enable or disable replication with specific members of a replication group. However, it is important to understand the ramifications of doing so. After a disabled member is enabled, the member must complete an initial replication of the replicated folder. Initial replication will cause about 1 KB of data to be transferred for each file or folder in the replicated folder, and any updated or new files present on the member will be moved to the DfsrPrivate\\PreExisting folder on the member, and it will be replaced with authoritative files from another member.\nIf all members are disabled for a replicated folder, then the first member that is enabled will automatically be made the primary member. If the discretionary access control list (DACL) on the local path for this member contains any inherited access-control entries (ACE), these ACEs will be converted to explicit ACEs with the same permissions so that all members will have the same DACL on the replicated folder root."
+                                    },
+                                    {
+                                        "uuid": "eae37b41f877464b9c81d72f6cc2c8fe",
+                                        "expression": "change(/Template App DFS Replication/dfsr.params[Connection,{#CONNECTIONID},Enabled])=1",
+                                        "name": "RG '{#RGNAME}': connection '{#SSERVERNAME}>{#RSERVERNAME}' was enabled",
+                                        "priority": "INFO",
+                                        "description": "You can enable or disable replication with specific members of a replication group. However, it is important to understand the ramifications of doing so. After a disabled member is enabled, the member must complete an initial replication of the replicated folder. Initial replication will cause about 1 KB of data to be transferred for each file or folder in the replicated folder, and any updated or new files present on the member will be moved to the DfsrPrivate\\PreExisting folder on the member, and it will be replaced with authoritative files from another member.\nIf all members are disabled for a replicated folder, then the first member that is enabled will automatically be made the primary member. If the discretionary access control list (DACL) on the local path for this member contains any inherited access-control entries (ACE), these ACEs will be converted to explicit ACEs with the same permissions so that all members will have the same DACL on the replicated folder root."
+                                    }
+                                ]
+                            },
+                            {
+                                "uuid": "9abe73e7ad914bc2ad7314f675a607e0",
+                                "name": "RG '{#RGNAME}': connection '{#SSERVERNAME}>{#RSERVERNAME}' state",
+                                "key": "dfsr.params[Connection,{#CONNECTIONID},State]",
+                                "delay": "300",
+                                "history": "7d",
+                                "description": "The current connection state.\nConnecting (0)\nOnline (1)\nOffline (2)\nIn Error (3)\nOutbound connections are created on demand after the partner establishes a connection. The DFSR service cannot detect when an outbound connection has been deleted; by default, it waits for 12 hours idle time before determining that the connection has been lost.\nInbound connections persist as long as they are configured.",
+                                "valuemap": {
+                                    "name": "DFSR::ConnectionState"
+                                },
+                                "tags": [
+                                    {
+                                        "tag": "Application",
+                                        "value": "DFS Replication Connections"
+                                    },
+                                    {
+                                        "tag": "Application",
+                                        "value": "DFS Replication Groups"
+                                    }
+                                ],
+                                "trigger_prototypes": [
+                                    {
+                                        "uuid": "875769d6658948068df5ff8bb84c79c9",
+                                        "expression": "last(/Template App DFS Replication/dfsr.params[Connection,{#CONNECTIONID},State])=0",
+                                        "name": "RG '{#RGNAME}': connection '{#SSERVERNAME}>{#RSERVERNAME}' became 'Connecting'",
+                                        "url": "https://docs.microsoft.com/en-us/previous-versions/windows/desktop/dfsr/images/connection-state.png",
+                                        "priority": "INFO",
+                                        "description": "Outbound connections are created on demand after the partner establishes a connection. The DFSR service cannot detect when an outbound connection has been deleted; by default, it waits for 12 hours idle time before determining that the connection has been lost.\nInbound connections persist as long as they are configured."
+                                    },
+                                    {
+                                        "uuid": "b3d309431fe349cb82436041bdbd3313",
+                                        "expression": "last(/Template App DFS Replication/dfsr.params[Connection,{#CONNECTIONID},State])=3",
+                                        "name": "RG '{#RGNAME}': connection '{#SSERVERNAME}>{#RSERVERNAME}' became 'In Error'",
+                                        "url": "https://docs.microsoft.com/en-us/previous-versions/windows/desktop/dfsr/images/connection-state.png",
+                                        "priority": "AVERAGE",
+                                        "description": "Outbound connections are created on demand after the partner establishes a connection. The DFSR service cannot detect when an outbound connection has been deleted; by default, it waits for 12 hours idle time before determining that the connection has been lost.\nInbound connections persist as long as they are configured."
+                                    },
+                                    {
+                                        "uuid": "ccb4aa1abb004db68baf16f260a795e5",
+                                        "expression": "last(/Template App DFS Replication/dfsr.params[Connection,{#CONNECTIONID},State])=2",
+                                        "name": "RG '{#RGNAME}': connection '{#SSERVERNAME}>{#RSERVERNAME}' became 'Offline'",
+                                        "url": "https://docs.microsoft.com/en-us/previous-versions/windows/desktop/dfsr/images/connection-state.png",
+                                        "priority": "INFO",
+                                        "description": "Outbound connections are created on demand after the partner establishes a connection. The DFSR service cannot detect when an outbound connection has been deleted; by default, it waits for 12 hours idle time before determining that the connection has been lost.\nInbound connections persist as long as they are configured."
+                                    }
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        "uuid": "5b701040e00c4a7c9c5b7e4bea0ed5e0",
+                        "name": "DFS Replication Connections PerfCounters LLD",
+                        "key": "dfsr.discovery[ConPerfCounter]",
+                        "delay": "3600",
+                        "lifetime": "1d",
+                        "enabled_lifetime_type": "DISABLE_NEVER",
+                        "item_prototypes": [
+                            {
+                                "uuid": "39b1ab1ab39d40b4a6b4511871dcae1c",
+                                "name": "RG '{#RGNAME}' ({#RCPARTNER}): total bytes received",
+                                "key": "perf_counter[\\{#RCPERFOBJECTID}({#RCPERFINSTANCEID})\\{#RCPERFCOUNTER1ID}]",
+                                "delay": "60",
+                                "history": "7d",
+                                "status": "DISABLED",
+                                "units": "B",
+                                "description": "Total Bytes Received shows the total number of bytes received on the connection. The bytes received value includes file data and replication metadata.",
+                                "tags": [
+                                    {
+                                        "tag": "Application",
+                                        "value": "DFS Replication Connections"
+                                    },
+                                    {
+                                        "tag": "Application",
+                                        "value": "DFS Replication Groups"
+                                    },
+                                    {
+                                        "tag": "Application",
+                                        "value": "Performance"
+                                    }
+                                ]
+                            },
+                            {
+                                "uuid": "f3e0399f35c54b8192f65608abd1578e",
+                                "name": "RG '{#RGNAME}' ({#RCPARTNER}): total files received",
+                                "key": "perf_counter[\\{#RCPERFOBJECTID}({#RCPERFINSTANCEID})\\{#RCPERFCOUNTER2ID}]",
+                                "delay": "60",
+                                "history": "7d",
+                                "status": "DISABLED",
+                                "description": "Total Files Received shows the number of files that were received on the connection.",
+                                "tags": [
+                                    {
+                                        "tag": "Application",
+                                        "value": "DFS Replication Connections"
+                                    },
+                                    {
+                                        "tag": "Application",
+                                        "value": "DFS Replication Groups"
+                                    },
+                                    {
+                                        "tag": "Application",
+                                        "value": "Performance"
+                                    }
+                                ]
+                            },
+                            {
+                                "uuid": "48d4d91cca384bc88489aa3a19c0e320",
+                                "name": "RG '{#RGNAME}' ({#RCPARTNER}): size of files received",
+                                "key": "perf_counter[\\{#RCPERFOBJECTID}({#RCPERFINSTANCEID})\\{#RCPERFCOUNTER3ID}]",
+                                "delay": "60",
+                                "history": "7d",
+                                "status": "DISABLED",
+                                "units": "B",
+                                "description": "Size of Files Received shows the uncompressed size (in bytes) of the files received on this connection. This is the number of bytes that would have been received had DFS Replication compression not been used.",
+                                "tags": [
+                                    {
+                                        "tag": "Application",
+                                        "value": "DFS Replication Connections"
+                                    },
+                                    {
+                                        "tag": "Application",
+                                        "value": "DFS Replication Groups"
+                                    },
+                                    {
+                                        "tag": "Application",
+                                        "value": "Performance"
+                                    }
+                                ]
+                            },
+                            {
+                                "uuid": "4fc1e9eef4ff4c3ca396700aa389c9ba",
+                                "name": "RG '{#RGNAME}' ({#RCPARTNER}): compressed size of files received",
+                                "key": "perf_counter[\\{#RCPERFOBJECTID}({#RCPERFINSTANCEID})\\{#RCPERFCOUNTER4ID}]",
+                                "delay": "60",
+                                "history": "7d",
+                                "status": "DISABLED",
+                                "units": "B",
+                                "description": "Compressed Size of Files Received shows the compressed size of files (in bytes) received on the connection.",
+                                "tags": [
+                                    {
+                                        "tag": "Application",
+                                        "value": "DFS Replication Connections"
+                                    },
+                                    {
+                                        "tag": "Application",
+                                        "value": "DFS Replication Groups"
+                                    },
+                                    {
+                                        "tag": "Application",
+                                        "value": "Performance"
+                                    }
+                                ]
+                            },
+                            {
+                                "uuid": "eb89167ab6d94432952dd22872217354",
+                                "name": "RG '{#RGNAME}' ({#RCPARTNER}): bytes received per second",
+                                "key": "perf_counter[\\{#RCPERFOBJECTID}({#RCPERFINSTANCEID})\\{#RCPERFCOUNTER5ID}]",
+                                "delay": "60",
+                                "history": "7d",
+                                "value_type": "FLOAT",
+                                "units": "Bps",
+                                "description": "Bytes Received Per Second shows an estimate of the average number of bytes that were received each second over the past 30 seconds.",
+                                "tags": [
+                                    {
+                                        "tag": "Application",
+                                        "value": "DFS Replication Connections"
+                                    },
+                                    {
+                                        "tag": "Application",
+                                        "value": "DFS Replication Groups"
+                                    },
+                                    {
+                                        "tag": "Application",
+                                        "value": "Performance"
+                                    }
+                                ]
+                            },
+                            {
+                                "uuid": "1ccfc993368549dfa3573321a2196593",
+                                "name": "RG '{#RGNAME}' ({#RCPARTNER}): RDC number of riles received",
+                                "key": "perf_counter[\\{#RCPERFOBJECTID}({#RCPERFINSTANCEID})\\{#RCPERFCOUNTER6ID}]",
+                                "delay": "60",
+                                "history": "7d",
+                                "status": "DISABLED",
+                                "description": "RDC Number of Files Received shows the number files that were received on this connection.",
+                                "tags": [
+                                    {
+                                        "tag": "Application",
+                                        "value": "DFS Replication Connections"
+                                    },
+                                    {
+                                        "tag": "Application",
+                                        "value": "DFS Replication Groups"
+                                    },
+                                    {
+                                        "tag": "Application",
+                                        "value": "Performance"
+                                    }
+                                ]
+                            },
+                            {
+                                "uuid": "b0ec342e608447a8ad74c979668df470",
+                                "name": "RG '{#RGNAME}' ({#RCPARTNER}): RDC size of files received",
+                                "key": "perf_counter[\\{#RCPERFOBJECTID}({#RCPERFINSTANCEID})\\{#RCPERFCOUNTER7ID}]",
+                                "delay": "60",
+                                "history": "7d",
+                                "status": "DISABLED",
+                                "units": "B",
+                                "description": "RDC Size of Files Received shows the uncompressed size (in bytes) of files received with remote differential compression (RDC) for this connection. This is the number of bytes that would have been received had neither compression nor RDC been used. This is not the actual number of bytes received over the network.",
+                                "tags": [
+                                    {
+                                        "tag": "Application",
+                                        "value": "DFS Replication Connections"
+                                    },
+                                    {
+                                        "tag": "Application",
+                                        "value": "DFS Replication Groups"
+                                    },
+                                    {
+                                        "tag": "Application",
+                                        "value": "Performance"
+                                    }
+                                ]
+                            },
+                            {
+                                "uuid": "37a848944c5e485ab805d354162b24ed",
+                                "name": "RG '{#RGNAME}' ({#RCPARTNER}): RDC compressed size of files received",
+                                "key": "perf_counter[\\{#RCPERFOBJECTID}({#RCPERFINSTANCEID})\\{#RCPERFCOUNTER8ID}]",
+                                "delay": "60",
+                                "history": "7d",
+                                "status": "DISABLED",
+                                "units": "B",
+                                "description": "RDC Compressed Size of Files Received shows the compressed size (in bytes) of files received with remote differential compression (RDC) for this connection. This is the number of bytes that would have been received had RDC not been used. This is not the actual number of bytes received over the network.",
+                                "tags": [
+                                    {
+                                        "tag": "Application",
+                                        "value": "DFS Replication Connections"
+                                    },
+                                    {
+                                        "tag": "Application",
+                                        "value": "DFS Replication Groups"
+                                    },
+                                    {
+                                        "tag": "Application",
+                                        "value": "Performance"
+                                    }
+                                ]
+                            },
+                            {
+                                "uuid": "eeeaa29eb6db41ddb69a721b2579b535",
+                                "name": "RG '{#RGNAME}' ({#RCPARTNER}): RDC bytes received",
+                                "key": "perf_counter[\\{#RCPERFOBJECTID}({#RCPERFINSTANCEID})\\{#RCPERFCOUNTER9ID}]",
+                                "delay": "60",
+                                "history": "7d",
+                                "status": "DISABLED",
+                                "units": "B",
+                                "description": "RDC Bytes Received shows the bytes that were received on this connection while replicating files using remote differential compression (RDC). This is the actual bytes received over the network without the networking protocol overhead.",
+                                "tags": [
+                                    {
+                                        "tag": "Application",
+                                        "value": "DFS Replication Connections"
+                                    },
+                                    {
+                                        "tag": "Application",
+                                        "value": "DFS Replication Groups"
+                                    },
+                                    {
+                                        "tag": "Application",
+                                        "value": "Performance"
+                                    }
+                                ]
+                            },
+                            {
+                                "uuid": "5420f7d320e140b386622f99e2315dda",
+                                "name": "RG '{#RGNAME}' ({#RCPARTNER}): bandwidth savings using DFS replication",
+                                "key": "perf_counter[\\{#RCPERFOBJECTID}({#RCPERFINSTANCEID})\\{#RCPERFCOUNTER10ID}]",
+                                "delay": "60",
+                                "history": "7d",
+                                "value_type": "FLOAT",
+                                "status": "DISABLED",
+                                "units": "%",
+                                "description": "Bandwidth Savings Using DFS Replication shows the percentage of bandwidth that was saved by the DFS Replication service for this connection using a combination of remote differential compression (RDC) and other compression technologies that minimize network bandwidth use. For example, a value of 20 indicates that the DFS Replication service used 20% less bandwidth than it would have used if it had transmitted the entire files uncompressed over the network.",
+                                "tags": [
+                                    {
+                                        "tag": "Application",
+                                        "value": "DFS Replication Connections"
+                                    },
+                                    {
+                                        "tag": "Application",
+                                        "value": "DFS Replication Groups"
+                                    },
+                                    {
+                                        "tag": "Application",
+                                        "value": "Performance"
+                                    }
+                                ]
+                            }
+                        ],
+                        "graph_prototypes": [
+                            {
+                                "uuid": "ecbc161c6e144a698326c290a87c66bd",
+                                "name": "RG '{#RGNAME}' ({#RCPARTNER}): bandwidth usage",
+                                "width": "600",
+                                "height": "340",
+                                "graph_items": [
+                                    {
+                                        "drawtype": "GRADIENT_LINE",
+                                        "color": "00FF00",
+                                        "item": {
+                                            "host": "Template App DFS Replication",
+                                            "key": "perf_counter[\\{#RCPERFOBJECTID}({#RCPERFINSTANCEID})\\{#RCPERFCOUNTER5ID}]"
+                                        }
+                                    }
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        "uuid": "503d6810af2543d0ba1e3dc06489051c",
+                        "name": "DFS Replication Partners LLD",
+                        "key": "dfsr.discovery[Partner]",
+                        "delay": "3600",
+                        "lifetime": "1d",
+                        "enabled_lifetime_type": "DISABLE_NEVER",
+                        "item_prototypes": [
+                            {
+                                "uuid": "2cbc7e0616c6400993a63fe27ecf6af2",
+                                "name": "RG '{#RGNAME}: partner '{#PARTNERNAME}' ping check",
+                                "key": "dfsr.params[Partner,{#PARTNERID},PingCheckOK]",
+                                "delay": "600",
+                                "history": "7d",
+                                "valuemap": {
+                                    "name": "Service state"
+                                },
+                                "preprocessing": [
+                                    {
+                                        "type": "BOOL_TO_DECIMAL"
+                                    }
+                                ],
+                                "tags": [
+                                    {
+                                        "tag": "Application",
+                                        "value": "DFS Replication Connections"
+                                    },
+                                    {
+                                        "tag": "Application",
+                                        "value": "DFS Replication Groups"
+                                    }
+                                ],
+                                "trigger_prototypes": [
+                                    {
+                                        "uuid": "8e098be63d68454a92d680d1f0e5ea2e",
+                                        "expression": "last(/Template App DFS Replication/dfsr.params[Partner,{#PARTNERID},PingCheckOK])=0",
+                                        "name": "RG '{#RGNAME}': partner '{#PARTNERNAME}' ping check failed",
+                                        "priority": "WARNING"
+                                    }
+                                ]
+                            },
+                            {
+                                "uuid": "42b1fbfc651648318c21f33760edb0e4",
+                                "name": "RG '{#RGNAME}: partner '{#PARTNERNAME}' WMI check",
+                                "key": "dfsr.params[Partner,{#PARTNERID},WMICheckOK]",
+                                "delay": "600",
+                                "history": "7d",
+                                "valuemap": {
+                                    "name": "Service state"
+                                },
+                                "preprocessing": [
+                                    {
+                                        "type": "BOOL_TO_DECIMAL"
+                                    }
+                                ],
+                                "tags": [
+                                    {
+                                        "tag": "Application",
+                                        "value": "DFS Replication Connections"
+                                    },
+                                    {
+                                        "tag": "Application",
+                                        "value": "DFS Replication Groups"
+                                    }
+                                ],
+                                "trigger_prototypes": [
+                                    {
+                                        "uuid": "17a7068b446a43949fe7d7c2a0711d9d",
+                                        "expression": "last(/Template App DFS Replication/dfsr.params[Partner,{#PARTNERID},WMICheckOK])=0",
+                                        "name": "RG '{#RGNAME}': partner '{#PARTNERNAME}' WMI check failed using '{#NTACCOUNT}' account",
+                                        "priority": "WARNING"
+                                    }
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        "uuid": "25a51b2c0ac04173b770fdd64b855035",
+                        "name": "DFS Replicated Folders Backlog LLD",
+                        "key": "dfsr.discovery[RFBacklog]",
+                        "delay": "3600",
+                        "lifetime": "1d",
+                        "enabled_lifetime_type": "DISABLE_NEVER",
+                        "item_prototypes": [
+                            {
+                                "uuid": "04f4777bf94f4871a8b8f99431bb48ba",
+                                "name": "RF '{#RGNAME}\\{#RFNAME}': backlog ({#SSERVERNAME}>{#RSERVERNAME})",
+                                "key": "dfsr.params[RFBacklog,{#RFID},{#RSERVERID}]",
+                                "delay": "60",
+                                "history": "7d",
+                                "description": "Backlog size for outgoing files",
+                                "tags": [
+                                    {
+                                        "tag": "Application",
+                                        "value": "DFS Replicated Folders"
+                                    },
+                                    {
+                                        "tag": "Application",
+                                        "value": "DFS Replication Connections"
+                                    }
+                                ],
+                                "trigger_prototypes": [
+                                    {
+                                        "uuid": "6bd4ea16a2394d238f9c3f232b81762a",
+                                        "expression": "min(/Template App DFS Replication/dfsr.params[RFBacklog,{#RFID},{#RSERVERID}],{$BACKLOG_PERIOD})>{$BACKLOG_MAX_AVERAGE}",
+                                        "name": "RF '{#RGNAME}\\{#RFNAME}': backlog ({#SSERVERNAME}>{#RSERVERNAME}) > {$BACKLOG_MAX_AVERAGE} for {$BACKLOG_PERIOD} (files={ITEM.LASTVALUE})",
+                                        "priority": "AVERAGE"
+                                    },
+                                    {
+                                        "uuid": "daf912724d2f44ba8db6cd3426a66158",
+                                        "expression": "min(/Template App DFS Replication/dfsr.params[RFBacklog,{#RFID},{#RSERVERID}],{$BACKLOG_PERIOD})>{$BACKLOG_MAX_WARNING}",
+                                        "name": "RF '{#RGNAME}\\{#RFNAME}': backlog ({#SSERVERNAME}>{#RSERVERNAME}) > {$BACKLOG_MAX_WARNING} for {$BACKLOG_PERIOD} (files={ITEM.LASTVALUE})",
+                                        "priority": "WARNING"
+                                    }
+                                ]
+                            }
+                        ],
+                        "graph_prototypes": [
+                            {
+                                "uuid": "574fbe96a2cb4ee58662fc59b5cc3f5c",
+                                "name": "RF '{#RGNAME}\\{#RFNAME}': backlog ({#SSERVERNAME}>{#RSERVERNAME})",
+                                "width": "600",
+                                "height": "340",
+                                "graph_items": [
+                                    {
+                                        "color": "00FF00",
+                                        "item": {
+                                            "host": "Template App DFS Replication",
+                                            "key": "dfsr.params[RFBacklog,{#RFID},{#RSERVERID}]"
+                                        }
+                                    }
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        "uuid": "a60bbe74d674442dbe0e4c821082f406",
+                        "name": "DFS Replicated Folders PerfCounters LLD",
+                        "key": "dfsr.discovery[RFPerfCounter]",
+                        "delay": "3600",
+                        "lifetime": "1d",
+                        "enabled_lifetime_type": "DISABLE_NEVER",
+                        "item_prototypes": [
+                            {
+                                "uuid": "8783bf19ec0b4381abf6d0fc0b1b52d2",
+                                "name": "RF '{#RGNAME}\\{#RFNAME}': staging files generated",
+                                "key": "perf_counter[\\{#RFPERFOBJECTID}({#RFPERFINSTANCEID})\\{#RFPERFCOUNTER1ID}]",
+                                "delay": "60",
+                                "history": "7d",
+                                "status": "DISABLED",
+                                "description": "Staging Files Generated shows the number of times replicated files and folders were staged by the DFS Replication service. The DFS Replication service stages files and folders in a staging folder before they are replicated, and automatically cleans up the staging folder when it exceeds a pre-configured threshold of the quota.",
+                                "tags": [
+                                    {
+                                        "tag": "Application",
+                                        "value": "DFS Replicated Folders"
+                                    },
+                                    {
+                                        "tag": "Application",
+                                        "value": "Performance"
+                                    }
+                                ]
+                            },
+                            {
+                                "uuid": "567b82d5027543bb84f314e2e5c103b7",
+                                "name": "RF '{#RGNAME}\\{#RFNAME}': staging bytes generated",
+                                "key": "perf_counter[\\{#RFPERFOBJECTID}({#RFPERFINSTANCEID})\\{#RFPERFCOUNTER2ID}]",
+                                "delay": "60",
+                                "history": "7d",
+                                "status": "DISABLED",
+                                "units": "B",
+                                "description": "Staging Bytes Generated shows the total size (in bytes) of replicated files and folders in the staging folder created by the DFS Replication service since last restart and is monotonically increasing counter. The DFS Replication service stages files and folders in the staging folder before they are replicated, and automatically cleans up the staging folder when it exceeds a pre-configured threshold of the quota.",
+                                "tags": [
+                                    {
+                                        "tag": "Application",
+                                        "value": "DFS Replicated Folders"
+                                    },
+                                    {
+                                        "tag": "Application",
+                                        "value": "Performance"
+                                    }
+                                ]
+                            },
+                            {
+                                "uuid": "72685d29bcac4a49b6f7d3987d0625b6",
+                                "name": "RF '{#RGNAME}\\{#RFNAME}': staging files cleaned up",
+                                "key": "perf_counter[\\{#RFPERFOBJECTID}({#RFPERFINSTANCEID})\\{#RFPERFCOUNTER3ID}]",
+                                "delay": "60",
+                                "history": "7d",
+                                "status": "DISABLED",
+                                "description": "Staging Files Cleaned up shows the number of files and folders that were cleaned up from the staging folder by the DFS Replication service. The DFS Replication service stages files and folders in the staging folder before they are replicated, and automatically cleans up the staging folder when it exceeds a pre-configured threshold of the quota.",
+                                "tags": [
+                                    {
+                                        "tag": "Application",
+                                        "value": "DFS Replicated Folders"
+                                    },
+                                    {
+                                        "tag": "Application",
+                                        "value": "Performance"
+                                    }
+                                ]
+                            },
+                            {
+                                "uuid": "e012c27faba945c8b3738665f95f70fc",
+                                "name": "RF '{#RGNAME}\\{#RFNAME}': staging bytes cleaned up",
+                                "key": "perf_counter[\\{#RFPERFOBJECTID}({#RFPERFINSTANCEID})\\{#RFPERFCOUNTER4ID}]",
+                                "delay": "60",
+                                "history": "7d",
+                                "status": "DISABLED",
+                                "units": "B",
+                                "description": "Staging Bytes Cleaned up shows the total size (in bytes) of the files and folders that were cleaned up from the staging folder by the DFS Replication service. The DFS Replication service stages files and folders in the staging folder before they are replicated, and automatically cleans up the staging folder when it exceeds a pre-configured threshold of the quota.",
+                                "tags": [
+                                    {
+                                        "tag": "Application",
+                                        "value": "DFS Replicated Folders"
+                                    },
+                                    {
+                                        "tag": "Application",
+                                        "value": "Performance"
+                                    }
+                                ]
+                            },
+                            {
+                                "uuid": "72dee65c672348db91f0865bff77dd82",
+                                "name": "RF '{#RGNAME}\\{#RFNAME}': staging space in use",
+                                "key": "perf_counter[\\{#RFPERFOBJECTID}({#RFPERFINSTANCEID})\\{#RFPERFCOUNTER5ID}]",
+                                "delay": "60",
+                                "history": "7d",
+                                "status": "DISABLED",
+                                "units": "B",
+                                "description": "Staging Space In Use shows the total size (in bytes) of the files and folders currently in the staging folder used by the DFS Replication service. This counter will fluctuate as staging space is reclaimed. The DFS Replication service stages files and folders in the staging folder before they are replicated, and automatically cleans up the staging folder when it exceeds a pre-configured threshold of the quota.",
+                                "tags": [
+                                    {
+                                        "tag": "Application",
+                                        "value": "DFS Replicated Folders"
+                                    },
+                                    {
+                                        "tag": "Application",
+                                        "value": "Performance"
+                                    }
+                                ]
+                            },
+                            {
+                                "uuid": "d64235f687824de1b312e4795d5c570c",
+                                "name": "RF '{#RGNAME}\\{#RFNAME}': conflict files generated",
+                                "key": "perf_counter[\\{#RFPERFOBJECTID}({#RFPERFINSTANCEID})\\{#RFPERFCOUNTER6ID}]",
+                                "delay": "60",
+                                "history": "7d",
+                                "description": "Conflict Files Generated shows the number of files and folders in this replicated folder that were moved to the Conflict and Deleted folder by the DFS Replication service. The DFS Replication service automatically detects and resolves conflicts encountered in replicated folders and moves the losing version to the Conflict and Deleted folder. The service automatically cleans up the Conflict and Deleted folder when it exceeds a pre-configured threshold of the quota.",
+                                "tags": [
+                                    {
+                                        "tag": "Application",
+                                        "value": "DFS Replicated Folders"
+                                    },
+                                    {
+                                        "tag": "Application",
+                                        "value": "Performance"
+                                    }
+                                ],
+                                "trigger_prototypes": [
+                                    {
+                                        "uuid": "cf380098de624aee9a4f4dce507c8dc8",
+                                        "expression": "last(/Template App DFS Replication/perf_counter[\\{#RFPERFOBJECTID}({#RFPERFINSTANCEID})\\{#RFPERFCOUNTER6ID}])-last(/Template App DFS Replication/perf_counter[\\{#RFPERFOBJECTID}({#RFPERFINSTANCEID})\\{#RFPERFCOUNTER6ID}],#1:now-{$CONFLICTSGENERATED_PERIOD})>{$CONFLICTSGENERATED_CHANGE_AVERAGE}",
+                                        "name": "RF '{#RGNAME}\\{#RFNAME}': there were >{$CONFLICTSGENERATED_CHANGE_AVERAGE} lost conflicts in {$CONFLICTSGENERATED_PERIOD} (conflicts={ITEM.LASTVALUE})",
+                                        "url": "https://techcommunity.microsoft.com/t5/storage-at-microsoft/dfs-replication-in-windows-server-2012-r2-restoring-conflicted/ba-p/424898",
+                                        "priority": "AVERAGE",
+                                        "description": "The DFS Replication service detected that a file was changed on multiple servers. A conflict resolution algorithm was used to determine the winning file. The losing file was moved to the Conflict and Deleted folder.\nMonitoring this performance counter enables administrators to keep track of the number of replication conflicts generated for replicated folders on the monitored computer.\nFrequent conflicts indicate that files in a replicated folder are frequently being modified on multiple servers in a short period. When multiple users need to modify the same files at the same time on different servers, use the file check-out feature of Windows SharePoint Services to ensure that only one user is working on a file."
+                                    },
+                                    {
+                                        "uuid": "eb9aee73288b46358f634e8d19aa53c2",
+                                        "expression": "last(/Template App DFS Replication/perf_counter[\\{#RFPERFOBJECTID}({#RFPERFINSTANCEID})\\{#RFPERFCOUNTER6ID}])-last(/Template App DFS Replication/perf_counter[\\{#RFPERFOBJECTID}({#RFPERFINSTANCEID})\\{#RFPERFCOUNTER6ID}],#1:now-{$CONFLICTSGENERATED_PERIOD})>{$CONFLICTSGENERATED_CHANGE_WARNING}",
+                                        "name": "RF '{#RGNAME}\\{#RFNAME}': there were >{$CONFLICTSGENERATED_CHANGE_WARNING} lost conflicts in {$CONFLICTSGENERATED_PERIOD}  (conflicts={ITEM.LASTVALUE})",
+                                        "url": "https://techcommunity.microsoft.com/t5/storage-at-microsoft/dfs-replication-in-windows-server-2012-r2-restoring-conflicted/ba-p/424898",
+                                        "priority": "WARNING",
+                                        "description": "The DFS Replication service detected that a file was changed on multiple servers. A conflict resolution algorithm was used to determine the winning file. The losing file was moved to the Conflict and Deleted folder.\nMonitoring this performance counter enables administrators to keep track of the number of replication conflicts generated for replicated folders on the monitored computer.\nFrequent conflicts indicate that files in a replicated folder are frequently being modified on multiple servers in a short period. When multiple users need to modify the same files at the same time on different servers, use the file check-out feature of Windows SharePoint Services to ensure that only one user is working on a file."
+                                    }
+                                ]
+                            },
+                            {
+                                "uuid": "4bab80fa990d4cb2a2cd4fb0c74f23cb",
+                                "name": "RF '{#RGNAME}\\{#RFNAME}': conflict bytes generated",
+                                "key": "perf_counter[\\{#RFPERFOBJECTID}({#RFPERFINSTANCEID})\\{#RFPERFCOUNTER7ID}]",
+                                "delay": "60",
+                                "history": "7d",
+                                "status": "DISABLED",
+                                "units": "B",
+                                "description": "Conflict Bytes Generated shows the total size (in bytes) of the files and folders in this replicated folder that were moved to the Conflict and Deleted folder by the DFS Replication service. The DFS Replication service automatically detects and resolves conflicts encountered in replicated folders and moves the losing version to the Conflict and Deleted folder. The service automatically cleans up the Conflict and Deleted folder when it exceeds a pre-configured threshold of the quota.",
+                                "tags": [
+                                    {
+                                        "tag": "Application",
+                                        "value": "DFS Replicated Folders"
+                                    },
+                                    {
+                                        "tag": "Application",
+                                        "value": "Performance"
+                                    }
+                                ]
+                            },
+                            {
+                                "uuid": "bb0964cac8944cccbb455ce2e0868976",
+                                "name": "RF '{#RGNAME}\\{#RFNAME}': conflict files cleaned up",
+                                "key": "perf_counter[\\{#RFPERFOBJECTID}({#RFPERFINSTANCEID})\\{#RFPERFCOUNTER8ID}]",
+                                "delay": "60",
+                                "history": "7d",
+                                "status": "DISABLED",
+                                "description": "Conflict Files Cleaned up shows the number the conflict loser files and folders that were deleted from the Conflict and Deleted folder by the DFS Replication service. The DFS Replication service automatically detects and resolves conflicts encountered in replicated folders and moves the losing version to the Conflict and Deleted folder. The service automatically cleans up the Conflict and Deleted folder when it exceeds a pre-configured threshold of the quota.",
+                                "tags": [
+                                    {
+                                        "tag": "Application",
+                                        "value": "DFS Replicated Folders"
+                                    },
+                                    {
+                                        "tag": "Application",
+                                        "value": "Performance"
+                                    }
+                                ]
+                            },
+                            {
+                                "uuid": "4758b3cb7ed5434a8e869ff376376bed",
+                                "name": "RF '{#RGNAME}\\{#RFNAME}': conflict bytes cleaned up",
+                                "key": "perf_counter[\\{#RFPERFOBJECTID}({#RFPERFINSTANCEID})\\{#RFPERFCOUNTER9ID}]",
+                                "delay": "60",
+                                "history": "7d",
+                                "status": "DISABLED",
+                                "units": "B",
+                                "description": "Conflict Bytes Cleaned up shows the total size (in bytes) of the conflict loser files and folders that were deleted from the Conflict and Deleted folder by the DFS Replication service. The DFS Replication service automatically detects and resolves conflicts encountered in replicated folders and moves the losing version to the Conflict and Deleted folder. The service automatically cleans up the Conflict and Deleted folder when it exceeds a pre-configured threshold of the quota.",
+                                "tags": [
+                                    {
+                                        "tag": "Application",
+                                        "value": "DFS Replicated Folders"
+                                    },
+                                    {
+                                        "tag": "Application",
+                                        "value": "Performance"
+                                    }
+                                ]
+                            },
+                            {
+                                "uuid": "ed84fdde2c6a436d8a5d6288d0b12788",
+                                "name": "RF '{#RGNAME}\\{#RFNAME}': conflict space in use",
+                                "key": "perf_counter[\\{#RFPERFOBJECTID}({#RFPERFINSTANCEID})\\{#RFPERFCOUNTER10ID}]",
+                                "delay": "60",
+                                "history": "7d",
+                                "status": "DISABLED",
+                                "units": "B",
+                                "description": "Conflict Space in Use shows the total size (in bytes) of the conflict loser files and folders currently in the Conflict and Deleted folder used by the DFS Replication service. The DFS Replication service automatically detects and resolves conflicts encountered in replicated folders and moves the losing version to the Conflict and Deleted folder. The service automatically cleans up the Conflict and Deleted folder when it exceeds a pre-configured threshold of the quota.",
+                                "tags": [
+                                    {
+                                        "tag": "Application",
+                                        "value": "DFS Replicated Folders"
+                                    },
+                                    {
+                                        "tag": "Application",
+                                        "value": "Performance"
+                                    }
+                                ]
+                            },
+                            {
+                                "uuid": "35a01d65790b4be18363e97a52d7a2b6",
+                                "name": "RF '{#RGNAME}\\{#RFNAME}': conflict folder cleanups completed",
+                                "key": "perf_counter[\\{#RFPERFOBJECTID}({#RFPERFINSTANCEID})\\{#RFPERFCOUNTER11ID}]",
+                                "delay": "60",
+                                "history": "7d",
+                                "status": "DISABLED",
+                                "description": "Conflict Folder Cleanups Completed shows the number of times conflict loser files and folders in the Conflict and Deleted folder were deleted by the DFS Replication service. The DFS Replication service automatically detects and resolves conflicts encountered in replicated folders and moves the losing version to the Conflict and Deleted folder. The service automatically cleans up the Conflict and Deleted folder when it exceeds a pre-configured threshold of the quota.",
+                                "tags": [
+                                    {
+                                        "tag": "Application",
+                                        "value": "DFS Replicated Folders"
+                                    },
+                                    {
+                                        "tag": "Application",
+                                        "value": "Performance"
+                                    }
+                                ]
+                            },
+                            {
+                                "uuid": "dba434b0d7e4465a8c171e7a93cc3ba0",
+                                "name": "RF '{#RGNAME}\\{#RFNAME}': file installs succeeded",
+                                "key": "perf_counter[\\{#RFPERFOBJECTID}({#RFPERFINSTANCEID})\\{#RFPERFCOUNTER12ID}]",
+                                "delay": "60",
+                                "history": "7d",
+                                "status": "DISABLED",
+                                "description": "File Installs Succeeded shows the number of files that were successfully received from sending members and installed locally on this server. The DFS Replication service replicates staged files into the staging folder, uncompresses them in the Installing folder, and renames them to the target location. The second and third steps of this process are known as installing the file.",
+                                "tags": [
+                                    {
+                                        "tag": "Application",
+                                        "value": "DFS Replicated Folders"
+                                    },
+                                    {
+                                        "tag": "Application",
+                                        "value": "Performance"
+                                    }
+                                ]
+                            },
+                            {
+                                "uuid": "2b16b534a17f459ca392e479d2638196",
+                                "name": "RF '{#RGNAME}\\{#RFNAME}': file installs retried",
+                                "key": "perf_counter[\\{#RFPERFOBJECTID}({#RFPERFINSTANCEID})\\{#RFPERFCOUNTER13ID}]",
+                                "delay": "60",
+                                "history": "7d",
+                                "status": "DISABLED",
+                                "description": "File Installs Retried shows the number of file installs that are being retried due to sharing violations or other errors encountered when installing the files. The DFS Replication service replicates staged files into the staging folder, uncompresses them in the Installing folder, and renames them to the target location. The second and third steps of this process are known as installing the file.",
+                                "tags": [
+                                    {
+                                        "tag": "Application",
+                                        "value": "DFS Replicated Folders"
+                                    },
+                                    {
+                                        "tag": "Application",
+                                        "value": "Performance"
+                                    }
+                                ]
+                            },
+                            {
+                                "uuid": "6b91c6f38ad649a3a463721b9bd6cc5f",
+                                "name": "RF '{#RGNAME}\\{#RFNAME}': updates dropped",
+                                "key": "perf_counter[\\{#RFPERFOBJECTID}({#RFPERFINSTANCEID})\\{#RFPERFCOUNTER14ID}]",
+                                "delay": "60",
+                                "history": "7d",
+                                "status": "DISABLED",
+                                "description": "Updates Dropped shows the number of redundant file replication update records that were ignored by the DFS Replication service because they did not change the replicated file or folder. For example, dropped updates can occur when access control lists (ACLs) are overwritten with identical ACLs on a file or folder.",
+                                "tags": [
+                                    {
+                                        "tag": "Application",
+                                        "value": "DFS Replicated Folders"
+                                    },
+                                    {
+                                        "tag": "Application",
+                                        "value": "Performance"
+                                    }
+                                ]
+                            },
+                            {
+                                "uuid": "6fb036ccf95542a5a964f010ce6c2c71",
+                                "name": "RF '{#RGNAME}\\{#RFNAME}': deleted files generated",
+                                "key": "perf_counter[\\{#RFPERFOBJECTID}({#RFPERFINSTANCEID})\\{#RFPERFCOUNTER15ID}]",
+                                "delay": "60",
+                                "history": "7d",
+                                "status": "DISABLED",
+                                "description": "Deleted Files Generated shows the number of replicated deleted files and folders that were moved to the Conflict and Deleted folder after they were deleted from a replicated folder on a sending member. The DFS Replication service automatically cleans up the Conflict and Deleted folder when it exceeds a pre-configured threshold of the quota.",
+                                "tags": [
+                                    {
+                                        "tag": "Application",
+                                        "value": "DFS Replicated Folders"
+                                    },
+                                    {
+                                        "tag": "Application",
+                                        "value": "Performance"
+                                    }
+                                ]
+                            },
+                            {
+                                "uuid": "ab995c382bb64e458d4add5c81a3f833",
+                                "name": "RF '{#RGNAME}\\{#RFNAME}': deleted bytes generated",
+                                "key": "perf_counter[\\{#RFPERFOBJECTID}({#RFPERFINSTANCEID})\\{#RFPERFCOUNTER16ID}]",
+                                "delay": "60",
+                                "history": "7d",
+                                "status": "DISABLED",
+                                "units": "B",
+                                "description": "Deleted Bytes Generated shows the total size (in bytes) of replicated deleted files and folders that were moved to the Conflict and Deleted folder after they were deleted from a replicated folder on a sending member. The DFS Replication service automatically cleans up the Conflict and Deleted folder when it exceeds a pre-configured threshold of the quota.",
+                                "tags": [
+                                    {
+                                        "tag": "Application",
+                                        "value": "DFS Replicated Folders"
+                                    },
+                                    {
+                                        "tag": "Application",
+                                        "value": "Performance"
+                                    }
+                                ]
+                            },
+                            {
+                                "uuid": "137bcedc419b488a9af79dbc77e1a92b",
+                                "name": "RF '{#RGNAME}\\{#RFNAME}': deleted files cleaned up",
+                                "key": "perf_counter[\\{#RFPERFOBJECTID}({#RFPERFINSTANCEID})\\{#RFPERFCOUNTER17ID}]",
+                                "delay": "60",
+                                "history": "7d",
+                                "status": "DISABLED",
+                                "description": "Deleted Files Cleaned up shows the number of replicated deleted files and folders that were cleaned up from the Conflict and Deleted folder by the DFS Replication service. The service automatically cleans up the Conflict and Deleted folder when it exceeds a pre-configured threshold of the quota.",
+                                "tags": [
+                                    {
+                                        "tag": "Application",
+                                        "value": "DFS Replicated Folders"
+                                    },
+                                    {
+                                        "tag": "Application",
+                                        "value": "Performance"
+                                    }
+                                ]
+                            },
+                            {
+                                "uuid": "951b97f16a774b5b9b9f3a8576574963",
+                                "name": "RF '{#RGNAME}\\{#RFNAME}': deleted bytes cleaned up",
+                                "key": "perf_counter[\\{#RFPERFOBJECTID}({#RFPERFINSTANCEID})\\{#RFPERFCOUNTER18ID}]",
+                                "delay": "60",
+                                "history": "7d",
+                                "status": "DISABLED",
+                                "units": "B",
+                                "description": "Deleted Bytes Cleaned up shows the total size (in bytes) of replicating deleted files and folders (in bytes) that were cleaned up from the Conflict and Deleted folder by the DFS Replication service. The service automatically cleans up the Conflict and Deleted folder when it exceeds a pre-configured threshold of the quota.",
+                                "tags": [
+                                    {
+                                        "tag": "Application",
+                                        "value": "DFS Replicated Folders"
+                                    },
+                                    {
+                                        "tag": "Application",
+                                        "value": "Performance"
+                                    }
+                                ]
+                            },
+                            {
+                                "uuid": "b51fddbb08934958b8a5452b1c73b6a0",
+                                "name": "RF '{#RGNAME}\\{#RFNAME}': deleted space in use",
+                                "key": "perf_counter[\\{#RFPERFOBJECTID}({#RFPERFINSTANCEID})\\{#RFPERFCOUNTER19ID}]",
+                                "delay": "60",
+                                "history": "7d",
+                                "status": "DISABLED",
+                                "units": "B",
+                                "description": "Deleted Space in Use shows the total size (in bytes) of the deleted files and folders currently in the Conflict and Deleted folder used by the DFS Replication service. The DFS Replication service detects remote deletes from its sending partner and moves the file or folder to the Conflict and Deleted folder. The service automatically cleans up the Conflict and Deleted folder when it exceeds a pre-configured threshold of the quota.",
+                                "tags": [
+                                    {
+                                        "tag": "Application",
+                                        "value": "DFS Replicated Folders"
+                                    },
+                                    {
+                                        "tag": "Application",
+                                        "value": "Performance"
+                                    }
+                                ]
+                            },
+                            {
+                                "uuid": "e3e56ebe0bc14e89b86e8c85a993638b",
+                                "name": "RF '{#RGNAME}\\{#RFNAME}': total files received",
+                                "key": "perf_counter[\\{#RFPERFOBJECTID}({#RFPERFINSTANCEID})\\{#RFPERFCOUNTER20ID}]",
+                                "delay": "60",
+                                "history": "7d",
+                                "description": "Total Files Received shows the number of files that were received by this replicated folder.",
+                                "tags": [
+                                    {
+                                        "tag": "Application",
+                                        "value": "DFS Replicated Folders"
+                                    },
+                                    {
+                                        "tag": "Application",
+                                        "value": "Performance"
+                                    }
+                                ]
+                            },
+                            {
+                                "uuid": "1df879c265184066844d2e98b671a191",
+                                "name": "RF '{#RGNAME}\\{#RFNAME}': size of files received",
+                                "key": "perf_counter[\\{#RFPERFOBJECTID}({#RFPERFINSTANCEID})\\{#RFPERFCOUNTER21ID}]",
+                                "delay": "60",
+                                "history": "7d",
+                                "units": "B",
+                                "description": "Size of Files Received shows the uncompressed size (in bytes) of the files received for this replicated folder. This is the number of bytes that would have been received had DFS Replication compression not been used.",
+                                "tags": [
+                                    {
+                                        "tag": "Application",
+                                        "value": "DFS Replicated Folders"
+                                    },
+                                    {
+                                        "tag": "Application",
+                                        "value": "Performance"
+                                    }
+                                ]
+                            },
+                            {
+                                "uuid": "906148e25d764da29f381f603800b02b",
+                                "name": "RF '{#RGNAME}\\{#RFNAME}': compressed size of files received",
+                                "key": "perf_counter[\\{#RFPERFOBJECTID}({#RFPERFINSTANCEID})\\{#RFPERFCOUNTER22ID}]",
+                                "delay": "60",
+                                "history": "7d",
+                                "units": "B",
+                                "description": "Compressed Size of Files Received shows the compressed size (in bytes) of files received for this replicated folder.",
+                                "tags": [
+                                    {
+                                        "tag": "Application",
+                                        "value": "DFS Replicated Folders"
+                                    },
+                                    {
+                                        "tag": "Application",
+                                        "value": "Performance"
+                                    }
+                                ]
+                            },
+                            {
+                                "uuid": "c417c47593514f779d0bf03c02276bc4",
+                                "name": "RF '{#RGNAME}\\{#RFNAME}': RDC number of files received",
+                                "key": "perf_counter[\\{#RFPERFOBJECTID}({#RFPERFINSTANCEID})\\{#RFPERFCOUNTER23ID}]",
+                                "delay": "60",
+                                "history": "7d",
+                                "status": "DISABLED",
+                                "description": "RDC Number of Files Received shows the number files that were received for this replicated folder.",
+                                "tags": [
+                                    {
+                                        "tag": "Application",
+                                        "value": "DFS Replicated Folders"
+                                    },
+                                    {
+                                        "tag": "Application",
+                                        "value": "Performance"
+                                    }
+                                ]
+                            },
+                            {
+                                "uuid": "770acad841894b32a27891a509686e8a",
+                                "name": "RF '{#RGNAME}\\{#RFNAME}': RDC size of files received",
+                                "key": "perf_counter[\\{#RFPERFOBJECTID}({#RFPERFINSTANCEID})\\{#RFPERFCOUNTER24ID}]",
+                                "delay": "60",
+                                "history": "7d",
+                                "status": "DISABLED",
+                                "units": "B",
+                                "description": "RDC Size of Files Received shows the uncompressed size (in bytes) of the files received with remote differential compression (RDC) for this replicated folder. This is the number of bytes that would have been received had neither compression nor RDC been used. This is not the actual bytes received over the network.",
+                                "tags": [
+                                    {
+                                        "tag": "Application",
+                                        "value": "DFS Replicated Folders"
+                                    },
+                                    {
+                                        "tag": "Application",
+                                        "value": "Performance"
+                                    }
+                                ]
+                            },
+                            {
+                                "uuid": "8536a6968c824ca78f54752cad3ae049",
+                                "name": "RF '{#RGNAME}\\{#RFNAME}': RDC compressed size of files received",
+                                "key": "perf_counter[\\{#RFPERFOBJECTID}({#RFPERFINSTANCEID})\\{#RFPERFCOUNTER25ID}]",
+                                "delay": "60",
+                                "history": "7d",
+                                "status": "DISABLED",
+                                "units": "B",
+                                "description": "RDC Compressed Size of Files Received shows the compressed size (in bytes) of the files received with remote differential compression (RDC) for this replicated folder. This is the number of bytes that would have been received had RDC not been used. This is not the actual bytes received over the network.",
+                                "tags": [
+                                    {
+                                        "tag": "Application",
+                                        "value": "DFS Replicated Folders"
+                                    },
+                                    {
+                                        "tag": "Application",
+                                        "value": "Performance"
+                                    }
+                                ]
+                            },
+                            {
+                                "uuid": "902b2f2211d24472998684c36236cceb",
+                                "name": "RF '{#RGNAME}\\{#RFNAME}': bandwidth savings using DFS replication",
+                                "key": "perf_counter[\\{#RFPERFOBJECTID}({#RFPERFINSTANCEID})\\{#RFPERFCOUNTER27ID}]",
+                                "delay": "60",
+                                "history": "7d",
+                                "value_type": "FLOAT",
+                                "status": "DISABLED",
+                                "units": "%",
+                                "description": "Bandwidth Savings Using DFS Replication shows the percentage of bandwidth that was saved by the DFS Replication service for this replicated folder using a combination of remote differential compression (RDC) and other compression technologies that minimize network bandwidth. For example, a value of 20 indicates that the DFS Replication service used 20% less bandwidth than it would have used if it had transmitted the entire files uncompressed over the network.",
+                                "tags": [
+                                    {
+                                        "tag": "Application",
+                                        "value": "DFS Replicated Folders"
+                                    },
+                                    {
+                                        "tag": "Application",
+                                        "value": "Performance"
+                                    }
+                                ]
+                            }
+                        ],
+                        "graph_prototypes": [
+                            {
+                                "uuid": "ce3d8948df6c4409a74166058458617e",
+                                "name": "RF '{#RGNAME}\\{#RFNAME}': received bytes",
+                                "width": "600",
+                                "height": "340",
+                                "graph_items": [
+                                    {
+                                        "drawtype": "GRADIENT_LINE",
+                                        "color": "FFFF00",
+                                        "item": {
+                                            "host": "Template App DFS Replication",
+                                            "key": "perf_counter[\\{#RFPERFOBJECTID}({#RFPERFINSTANCEID})\\{#RFPERFCOUNTER21ID}]"
+                                        }
+                                    },
+                                    {
+                                        "sortorder": "1",
+                                        "drawtype": "GRADIENT_LINE",
+                                        "color": "0000FF",
+                                        "item": {
+                                            "host": "Template App DFS Replication",
+                                            "key": "perf_counter[\\{#RFPERFOBJECTID}({#RFPERFINSTANCEID})\\{#RFPERFCOUNTER22ID}]"
+                                        }
+                                    }
+                                ]
+                            },
+                            {
+                                "uuid": "52daadeec6c64381b942a1ca20e29fc0",
+                                "name": "RF '{#RGNAME}\\{#RFNAME}': received files and conflicts",
+                                "width": "600",
+                                "height": "340",
+                                "graph_items": [
+                                    {
+                                        "drawtype": "GRADIENT_LINE",
+                                        "color": "FFFF33",
+                                        "item": {
+                                            "host": "Template App DFS Replication",
+                                            "key": "perf_counter[\\{#RFPERFOBJECTID}({#RFPERFINSTANCEID})\\{#RFPERFCOUNTER20ID}]"
+                                        }
+                                    },
+                                    {
+                                        "sortorder": "1",
+                                        "drawtype": "GRADIENT_LINE",
+                                        "color": "C80000",
+                                        "item": {
+                                            "host": "Template App DFS Replication",
+                                            "key": "perf_counter[\\{#RFPERFOBJECTID}({#RFPERFINSTANCEID})\\{#RFPERFCOUNTER6ID}]"
+                                        }
+                                    }
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        "uuid": "27a4aba3ba81433d9e8bc870e9a45cb4",
+                        "name": "DFS Replicated Folders LLD",
+                        "key": "dfsr.discovery[RF]",
+                        "delay": "3600",
+                        "lifetime": "1d",
+                        "enabled_lifetime_type": "DISABLE_NEVER",
+                        "item_prototypes": [
+                            {
+                                "uuid": "213a177e12f34c44a79507a0b83562a9",
+                                "name": "RF '{#RGNAME}\\{#RFNAME}': conflict free (percentage)",
+                                "key": "dfsr.params[RF,{#RFID},ConflictPFree]",
+                                "delay": "900",
+                                "history": "7d",
+                                "value_type": "FLOAT",
+                                "units": "%",
+                                "tags": [
+                                    {
+                                        "tag": "Application",
+                                        "value": "DFS Replicated Folders"
+                                    }
+                                ],
+                                "trigger_prototypes": [
+                                    {
+                                        "uuid": "35bafca6209d4b0fac242aed768dbd77",
+                                        "expression": "last(/Template App DFS Replication/dfsr.params[RF,{#RFID},ConflictPFree])<{$CONFLICTDIRPFREE_MIN}",
+                                        "name": "RF '{#RGNAME}\\{#RFNAME}': Conflict and Deleted area free space < {$CONFLICTDIRPFREE_MIN}% ({ITEM.LASTVALUE} left)",
+                                        "priority": "WARNING",
+                                        "description": "Monitoring the space utilization of the Conflict and Deleted area helps ensure that there is enough space to store replication conflicts and files deleted from replicated folders on the monitored computer. You can view a log of conflict files and their original file names by viewing the ConflictandDeletedManifest.xml file in the DfsrPrivate folder. Large amounts of used conflict space indicate that files in a replicated folder are frequently being modified on multiple servers in a short period. When multiple users need to modify the same files at the same time on different servers, use the file check-out feature of Windows SharePoint Services to ensure that only one user is working on a file."
+                                    }
+                                ]
+                            },
+                            {
+                                "uuid": "9800bfcef4594985ba9c8eb2f76d7303",
+                                "name": "RF '{#RGNAME}\\{#RFNAME}': conflict quota",
+                                "key": "dfsr.params[RF,{#RFID},ConflictQuota]",
+                                "delay": "900",
+                                "history": "7d",
+                                "units": "B",
+                                "tags": [
+                                    {
+                                        "tag": "Application",
+                                        "value": "DFS Replicated Folders"
+                                    }
+                                ],
+                                "trigger_prototypes": [
+                                    {
+                                        "uuid": "c6546320148f4e66803403dd7d391bc2",
+                                        "expression": "(last(/Template App DFS Replication/dfsr.params[RF,{#RFID},ConflictQuota],#1)<>last(/Template App DFS Replication/dfsr.params[RF,{#RFID},ConflictQuota],#2))=1",
+                                        "name": "RF '{#RGNAME}\\{#RFNAME}': conflict quota was set to {ITEM.LASTVALUE}",
+                                        "priority": "INFO"
+                                    }
+                                ]
+                            },
+                            {
+                                "uuid": "6d6781b9e10b427ea2cafdb6f57c6713",
+                                "name": "RF '{#RGNAME}\\{#RFNAME}': conflict used",
+                                "key": "dfsr.params[RF,{#RFID},ConflictSize]",
+                                "delay": "900",
+                                "history": "7d",
+                                "units": "B",
+                                "tags": [
+                                    {
+                                        "tag": "Application",
+                                        "value": "DFS Replicated Folders"
+                                    }
+                                ]
+                            },
+                            {
+                                "uuid": "4e33481a8f164a739233e91690355a76",
+                                "name": "RF '{#RGNAME}\\{#RFNAME}': enabled",
+                                "key": "dfsr.params[RF,{#RFID},Enabled]",
+                                "delay": "900",
+                                "history": "7d",
+                                "description": "Replicated folders that are disabled do not replicate and may be out of sync with other members of the replication group. This occurs when an administrator disables the folder, usually to conduct maintenance.\nCAUTION: After enabling a replicated folder, DFS Replication performs the initial replication by using the primary member\u2019s files as authoritative regardless of the age, potentially overwriting newer files.\nTIP: To prevent this issue from occurring in the future, disable replication connections instead of replicated folders.",
+                                "preprocessing": [
+                                    {
+                                        "type": "BOOL_TO_DECIMAL"
+                                    }
+                                ],
+                                "tags": [
+                                    {
+                                        "tag": "Application",
+                                        "value": "DFS Replicated Folders"
+                                    }
+                                ],
+                                "trigger_prototypes": [
+                                    {
+                                        "uuid": "785210b2f602427da249e07dfa402043",
+                                        "expression": "last(/Template App DFS Replication/dfsr.params[RF,{#RFID},Enabled])=0",
+                                        "name": "RF '{#RGNAME}\\{#RFNAME}' was disabled",
+                                        "url": "https://docs.microsoft.com/en-us/previous-versions/windows/it-pro/windows-server-2008-R2-and-2008/cc725867(v=ws.11)?redirectedfrom=MSDN",
+                                        "priority": "AVERAGE",
+                                        "description": "Replicated folders that are disabled do not replicate and may be out of sync with other members of the replication group. This occurs when an administrator disables the folder, usually to conduct maintenance.\nCAUTION: After enabling a replicated folder, DFS Replication performs the initial replication by using the primary member\u2019s files as authoritative regardless of the age, potentially overwriting newer files.\nTIP: To prevent this issue from occurring in the future, disable replication connections instead of replicated folders."
+                                    },
+                                    {
+                                        "uuid": "d1a58660e46f438a81834bc9d0ff3d74",
+                                        "expression": "change(/Template App DFS Replication/dfsr.params[RF,{#RFID},Enabled])=1",
+                                        "name": "RF '{#RGNAME}\\{#RFNAME}' was enabled",
+                                        "url": "https://docs.microsoft.com/en-us/previous-versions/windows/it-pro/windows-server-2008-R2-and-2008/cc725867(v=ws.11)?redirectedfrom=MSDN",
+                                        "priority": "AVERAGE",
+                                        "description": "Replicated folders that are disabled do not replicate and may be out of sync with other members of the replication group. This occurs when an administrator disables the folder, usually to conduct maintenance.\nCAUTION: After enabling a replicated folder, DFS Replication performs the initial replication by using the primary member\u2019s files as authoritative regardless of the age, potentially overwriting newer files.\nTIP: To prevent this issue from occurring in the future, disable replication connections instead of replicated folders."
+                                    }
+                                ]
+                            },
+                            {
+                                "uuid": "4e0723539c704ee9b62320b89b3e0800",
+                                "name": "RF '{#RGNAME}\\{#RFNAME}': 'read-only' mode",
+                                "key": "dfsr.params[RF,{#RFID},ReadOnly]",
+                                "delay": "900",
+                                "history": "7d",
+                                "description": "A read-only replicated folder is a replicated folder on a particular member in which users cannot add or change files. This is convenient for read-only folders that you want to keep up-to-date with a central server (or servers). For example, software installation folders, or folders that contain published reports or documents. Read-only replicated folders are also used by read-only domain controllers (RODCs) to keep the SYSVOL shared folder updated while preventing local changes.\nRead-only replicated folders can be updated only with content from a read-write member of the replication group. All other attempts to write to the folder will fail. This includes performing an authoritative restore operation using a backup program.\nWARNING: When you make a replicated folder read-only, DFS Replication overwrites any content on the read-only member that has not yet replicated back to a read-write member. For this reason, it is a good idea to backup the folder, create a diagnostic report of replication and check the replication backlog before you make a replicated folder that contains existing content read-only.",
+                                "preprocessing": [
+                                    {
+                                        "type": "BOOL_TO_DECIMAL"
+                                    }
+                                ],
+                                "tags": [
+                                    {
+                                        "tag": "Application",
+                                        "value": "DFS Replicated Folders"
+                                    }
+                                ],
+                                "trigger_prototypes": [
+                                    {
+                                        "uuid": "bd84c50505a64215a60c5ee38a88f2eb",
+                                        "expression": "change(/Template App DFS Replication/dfsr.params[RF,{#RFID},ReadOnly])=1",
+                                        "name": "RF '{#RGNAME}\\{#RFNAME}' was set to 'read-only' mode",
+                                        "priority": "WARNING",
+                                        "description": "A read-only replicated folder is a replicated folder on a particular member in which users cannot add or change files. This is convenient for read-only folders that you want to keep up-to-date with a central server (or servers). For example, software installation folders, or folders that contain published reports or documents. Read-only replicated folders are also used by read-only domain controllers (RODCs) to keep the SYSVOL shared folder updated while preventing local changes.\nRead-only replicated folders can be updated only with content from a read-write member of the replication group. All other attempts to write to the folder will fail. This includes performing an authoritative restore operation using a backup program.\nWARNING: When you make a replicated folder read-only, DFS Replication overwrites any content on the read-only member that has not yet replicated back to a read-write member. For this reason, it is a good idea to backup the folder, create a diagnostic report of replication and check the replication backlog before you make a replicated folder that contains existing content read-only."
+                                    },
+                                    {
+                                        "uuid": "2b33fc15d9144c5287cbdeb27f5dde39",
+                                        "expression": "change(/Template App DFS Replication/dfsr.params[RF,{#RFID},ReadOnly])=-1",
+                                        "name": "RF '{#RGNAME}\\{#RFNAME}' was set to 'read-write' mode",
+                                        "priority": "WARNING",
+                                        "description": "A read-only replicated folder is a replicated folder on a particular member in which users cannot add or change files. This is convenient for read-only folders that you want to keep up-to-date with a central server (or servers). For example, software installation folders, or folders that contain published reports or documents. Read-only replicated folders are also used by read-only domain controllers (RODCs) to keep the SYSVOL shared folder updated while preventing local changes.\nRead-only replicated folders can be updated only with content from a read-write member of the replication group. All other attempts to write to the folder will fail. This includes performing an authoritative restore operation using a backup program.\nWARNING: When you make a replicated folder read-only, DFS Replication overwrites any content on the read-only member that has not yet replicated back to a read-write member. For this reason, it is a good idea to backup the folder, create a diagnostic report of replication and check the replication backlog before you make a replicated folder that contains existing content read-only."
+                                    }
+                                ]
+                            },
+                            {
+                                "uuid": "e2b7ad7784a448f9b1a167d2a478000b",
+                                "name": "RF '{#RGNAME}\\{#RFNAME}': redundancy",
+                                "key": "dfsr.params[RF,{#RFID},Redundancy]",
+                                "delay": "900",
+                                "history": "7d",
+                                "description": "Number of replication partners which store the folder in 'Normal' state",
+                                "tags": [
+                                    {
+                                        "tag": "Application",
+                                        "value": "DFS Replicated Folders"
+                                    }
+                                ],
+                                "trigger_prototypes": [
+                                    {
+                                        "uuid": "f8a54f1c99ad4446b54a0bc2df198607",
+                                        "expression": "last(/Template App DFS Replication/dfsr.params[RF,{#RFID},Redundancy])=0",
+                                        "name": "RF '{#RGNAME}\\{#RFNAME}': redundancy fail, no replicas in 'Normal' state found on any partner",
+                                        "priority": "AVERAGE",
+                                        "description": "The state of a replicated folder can be one of the following: uninitialized, initialized, initial sync, auto recovery, normal, or in error. When first configured, a replicated folder moves to the initialized or initial sync state, depending on whether the server is defined as the primary member of the replicated folder. If the server is defined as a primary member, Distributed File System Replication (DFSR) automatically initializes the folder. In addition, content within the folder is authoritative. That is, the content will win on conflict with another member."
+                                    }
+                                ]
+                            },
+                            {
+                                "uuid": "201beb5ab1044abc907ca083b0c30d60",
+                                "name": "RF '{#RGNAME}\\{#RFNAME}': 'remove deleted' enabled",
+                                "key": "dfsr.params[RF,{#RFID},RemoveDeleted]",
+                                "delay": "900",
+                                "history": "7d",
+                                "preprocessing": [
+                                    {
+                                        "type": "BOOL_TO_DECIMAL"
+                                    }
+                                ],
+                                "tags": [
+                                    {
+                                        "tag": "Application",
+                                        "value": "DFS Replicated Folders"
+                                    }
+                                ],
+                                "trigger_prototypes": [
+                                    {
+                                        "uuid": "5c74ec3eabcc4518ab46a9fe071c6104",
+                                        "expression": "change(/Template App DFS Replication/dfsr.params[RF,{#RFID},RemoveDeleted])=1",
+                                        "name": "RF '{#RGNAME}\\{#RFNAME}': deleted files saving was disabled",
+                                        "priority": "INFO",
+                                        "description": "Indicates whether the member computer deletes files and folders immediately following inbound replication. If this parameter has a value of $False, the member moves deleted files and folders to the ConflictAndDeleted folder when the deletion replicates inbound. The originating server always deletes files without preservation. You can use the Restore-DfsrPreservedFiles cmdlet to restore deleted files while they still exist in the ConflictAndDeleted folder. If this parameter has a value of $True, when a replicating member replicates a deletion, it deletes the local copy of the file immediately. If you do not specify this parameter, by default, DFS Replication preserves deleted files."
+                                    },
+                                    {
+                                        "uuid": "ff44ccde20e54f029ed88d17bdd58e93",
+                                        "expression": "change(/Template App DFS Replication/dfsr.params[RF,{#RFID},RemoveDeleted])=-1",
+                                        "name": "RF '{#RGNAME}\\{#RFNAME}': deleted files saving was enabled",
+                                        "priority": "INFO",
+                                        "description": "Indicates whether the member computer deletes files and folders immediately following inbound replication. If this parameter has a value of $False, the member moves deleted files and folders to the ConflictAndDeleted folder when the deletion replicates inbound. The originating server always deletes files without preservation. You can use the Restore-DfsrPreservedFiles cmdlet to restore deleted files while they still exist in the ConflictAndDeleted folder. If this parameter has a value of $True, when a replicating member replicates a deletion, it deletes the local copy of the file immediately. If you do not specify this parameter, by default, DFS Replication preserves deleted files."
+                                    }
+                                ]
+                            },
+                            {
+                                "uuid": "60c55c5f34b142d8b3aa3dc52c8b5c0f",
+                                "name": "RF '{#RGNAME}\\{#RFNAME}': stage free (percentage)",
+                                "key": "dfsr.params[RF,{#RFID},StagePFree]",
+                                "delay": "900",
+                                "history": "7d",
+                                "value_type": "FLOAT",
+                                "units": "%",
+                                "tags": [
+                                    {
+                                        "tag": "Application",
+                                        "value": "DFS Replicated Folders"
+                                    }
+                                ],
+                                "trigger_prototypes": [
+                                    {
+                                        "uuid": "9dc0202791d14ac485eb338bf903e30d",
+                                        "expression": "last(/Template App DFS Replication/dfsr.params[RF,{#RFID},StagePFree])<{$STAGEDIRPFREE_MIN}",
+                                        "name": "RF '{#RGNAME}\\{#RFNAME}': stage free space < {$STAGEDIRPFREE_MIN}% ({ITEM.LASTVALUE} left)",
+                                        "url": "https://docs.microsoft.com/en-us/previous-versions/windows/it-pro/windows-server-2008-R2-and-2008/cc754229(v=ws.11)",
+                                        "priority": "WARNING",
+                                        "description": "Optimizing the size of the staging folder can improve performance and reduce the likelihood of replication failing. When adjusting the size of the staging folder, consider the following factors.\nIf a staging folder quota is configured to be too small, DFS Replication might consume additional CPU and disk resources to regenerate the staged files. Replication might also slow down, or even stop, because the lack of staging space can effectively limit the number of concurrent transfers with partners.\nFor the initial replication of existing data on the primary member, the staging folder quota must be large enough so that replication can continue even if multiple large files remain in the staging folder because partners cannot promptly download the files."
+                                    }
+                                ]
+                            },
+                            {
+                                "uuid": "399bbb1671f947f5a01f00715c839404",
+                                "name": "RF '{#RGNAME}\\{#RFNAME}': stage quota",
+                                "key": "dfsr.params[RF,{#RFID},StageQuota]",
+                                "delay": "900",
+                                "history": "7d",
+                                "units": "B",
+                                "tags": [
+                                    {
+                                        "tag": "Application",
+                                        "value": "DFS Replicated Folders"
+                                    }
+                                ],
+                                "trigger_prototypes": [
+                                    {
+                                        "uuid": "37c5f1bf89144b669750cb9b63b44ea1",
+                                        "expression": "(last(/Template App DFS Replication/dfsr.params[RF,{#RFID},StageQuota],#1)<>last(/Template App DFS Replication/dfsr.params[RF,{#RFID},StageQuota],#2))=1",
+                                        "name": "RF '{#RGNAME}\\{#RFNAME}': stage quota was set to {ITEM.LASTVALUE}",
+                                        "priority": "INFO"
+                                    }
+                                ]
+                            },
+                            {
+                                "uuid": "2b9ab9f2481541059cf70af6f29a12ee",
+                                "name": "RF '{#RGNAME}\\{#RFNAME}': stage used",
+                                "key": "dfsr.params[RF,{#RFID},StageSize]",
+                                "delay": "900",
+                                "history": "7d",
+                                "units": "B",
+                                "tags": [
+                                    {
+                                        "tag": "Application",
+                                        "value": "DFS Replicated Folders"
+                                    }
+                                ]
+                            },
+                            {
+                                "uuid": "e433460fd42c4aa6a4df8636c6c3de86",
+                                "name": "RF '{#RGNAME}\\{#RFNAME}': state",
+                                "key": "dfsr.params[RF,{#RFID},State]",
+                                "delay": "300",
+                                "history": "7d",
+                                "description": "The current replicated folder state for this member.\nUninitialized (0)\nInitialized (1)\nInitial Sync (2)\nAuto Recovery (3)\nNormal (4)\nIn Error (5)",
+                                "valuemap": {
+                                    "name": "DFSR::RFState"
+                                },
+                                "tags": [
+                                    {
+                                        "tag": "Application",
+                                        "value": "DFS Replicated Folders"
+                                    }
+                                ],
+                                "trigger_prototypes": [
+                                    {
+                                        "uuid": "bee9c81576804032aa48d9fc78e261a9",
+                                        "expression": "last(/Template App DFS Replication/dfsr.params[RF,{#RFID},State])=3",
+                                        "name": "RF '{#RGNAME}\\{#RFNAME}': state became 'Auto Recovery'",
+                                        "priority": "AVERAGE",
+                                        "description": "The state of a replicated folder can be one of the following: uninitialized, initialized, initial sync, auto recovery, normal, or in error. When first configured, a replicated folder moves to the initialized or initial sync state, depending on whether the server is defined as the primary member of the replicated folder. If the server is defined as a primary member, Distributed File System Replication (DFSR) automatically initializes the folder. In addition, content within the folder is authoritative. That is, the content will win on conflict with another member."
+                                    },
+                                    {
+                                        "uuid": "1d2d577f19c14c0eba617c36b07a4cb7",
+                                        "expression": "last(/Template App DFS Replication/dfsr.params[RF,{#RFID},State])=5",
+                                        "name": "RF '{#RGNAME}\\{#RFNAME}': state became 'In Error'",
+                                        "priority": "HIGH",
+                                        "description": "The state of a replicated folder can be one of the following: uninitialized, initialized, initial sync, auto recovery, normal, or in error. When first configured, a replicated folder moves to the initialized or initial sync state, depending on whether the server is defined as the primary member of the replicated folder. If the server is defined as a primary member, Distributed File System Replication (DFSR) automatically initializes the folder. In addition, content within the folder is authoritative. That is, the content will win on conflict with another member."
+                                    },
+                                    {
+                                        "uuid": "a865b1cf514c4fa79fb1ac0775344f6b",
+                                        "expression": "last(/Template App DFS Replication/dfsr.params[RF,{#RFID},State])=1",
+                                        "name": "RF '{#RGNAME}\\{#RFNAME}': state became 'Initialized'",
+                                        "priority": "INFO",
+                                        "description": "The state of a replicated folder can be one of the following: uninitialized, initialized, initial sync, auto recovery, normal, or in error. When first configured, a replicated folder moves to the initialized or initial sync state, depending on whether the server is defined as the primary member of the replicated folder. If the server is defined as a primary member, Distributed File System Replication (DFSR) automatically initializes the folder. In addition, content within the folder is authoritative. That is, the content will win on conflict with another member."
+                                    },
+                                    {
+                                        "uuid": "e3d8ee4668174c7abe101cead66ec3fe",
+                                        "expression": "last(/Template App DFS Replication/dfsr.params[RF,{#RFID},State])=2",
+                                        "name": "RF '{#RGNAME}\\{#RFNAME}': state became 'Initial Sync'",
+                                        "priority": "INFO",
+                                        "description": "The state of a replicated folder can be one of the following: uninitialized, initialized, initial sync, auto recovery, normal, or in error. When first configured, a replicated folder moves to the initialized or initial sync state, depending on whether the server is defined as the primary member of the replicated folder. If the server is defined as a primary member, Distributed File System Replication (DFSR) automatically initializes the folder. In addition, content within the folder is authoritative. That is, the content will win on conflict with another member."
+                                    },
+                                    {
+                                        "uuid": "fc502477dde547f4afe8c58c23310f86",
+                                        "expression": "last(/Template App DFS Replication/dfsr.params[RF,{#RFID},State])=0",
+                                        "name": "RF '{#RGNAME}\\{#RFNAME}': state became 'Uninitialized'",
+                                        "priority": "INFO",
+                                        "description": "The state of a replicated folder can be one of the following: uninitialized, initialized, initial sync, auto recovery, normal, or in error. When first configured, a replicated folder moves to the initialized or initial sync state, depending on whether the server is defined as the primary member of the replicated folder. If the server is defined as a primary member, Distributed File System Replication (DFSR) automatically initializes the folder. In addition, content within the folder is authoritative. That is, the content will win on conflict with another member."
+                                    }
+                                ]
+                            }
+                        ],
+                        "graph_prototypes": [
+                            {
+                                "uuid": "01aaa76a676c40e092e5216d77b8502f",
+                                "name": "RF '{#RGNAME}\\{#RFNAME}': conflict space usage",
+                                "width": "600",
+                                "height": "340",
+                                "ymin_type_1": "FIXED",
+                                "graph_items": [
+                                    {
+                                        "drawtype": "GRADIENT_LINE",
+                                        "color": "00C800",
+                                        "type": "GRAPH_SUM",
+                                        "item": {
+                                            "host": "Template App DFS Replication",
+                                            "key": "dfsr.params[RF,{#RFID},ConflictQuota]"
+                                        }
+                                    },
+                                    {
+                                        "sortorder": "1",
+                                        "drawtype": "GRADIENT_LINE",
+                                        "color": "C80000",
+                                        "item": {
+                                            "host": "Template App DFS Replication",
+                                            "key": "dfsr.params[RF,{#RFID},ConflictSize]"
+                                        }
+                                    }
+                                ]
+                            },
+                            {
+                                "uuid": "617431638bf64b2789f61e43d212189e",
+                                "name": "RF '{#RGNAME}\\{#RFNAME}': stage space usage",
+                                "width": "600",
+                                "height": "340",
+                                "ymin_type_1": "FIXED",
+                                "graph_items": [
+                                    {
+                                        "drawtype": "GRADIENT_LINE",
+                                        "color": "00C800",
+                                        "type": "GRAPH_SUM",
+                                        "item": {
+                                            "host": "Template App DFS Replication",
+                                            "key": "dfsr.params[RF,{#RFID},StageQuota]"
+                                        }
+                                    },
+                                    {
+                                        "sortorder": "1",
+                                        "drawtype": "GRADIENT_LINE",
+                                        "color": "C80000",
+                                        "item": {
+                                            "host": "Template App DFS Replication",
+                                            "key": "dfsr.params[RF,{#RFID},StageSize]"
+                                        }
+                                    }
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        "uuid": "a33dfd14a29b4abcb65a8c429a70244b",
+                        "name": "DFS Replication Groups LLD",
+                        "key": "dfsr.discovery[RG]",
+                        "delay": "3600",
+                        "lifetime": "1d",
+                        "enabled_lifetime_type": "DISABLE_NEVER",
+                        "item_prototypes": [
+                            {
+                                "uuid": "f80452f9c8b842e699c9e7013e7b2a97",
+                                "name": "RG '{#RGNAME}': blank schedule",
+                                "key": "dfsr.params[RG,{#RGID},BlankSchedule]",
+                                "delay": "900",
+                                "history": "7d",
+                                "preprocessing": [
+                                    {
+                                        "type": "BOOL_TO_DECIMAL"
+                                    }
+                                ],
+                                "tags": [
+                                    {
+                                        "tag": "Application",
+                                        "value": "DFS Replication Connections"
+                                    },
+                                    {
+                                        "tag": "Application",
+                                        "value": "DFS Replication Groups"
+                                    }
+                                ],
+                                "trigger_prototypes": [
+                                    {
+                                        "uuid": "b7f6eaa1720b40bdaca9c14a5c1951b0",
+                                        "expression": "change(/Template App DFS Replication/dfsr.params[RG,{#RGID},BlankSchedule])=1",
+                                        "name": "RG '{#RGNAME}': default shedule was set to 'no replication' at all",
+                                        "priority": "INFO"
+                                    }
+                                ]
+                            },
+                            {
+                                "uuid": "e8b065c8f071468db104acefc0225b7b",
+                                "name": "RG '{#RGNAME}': inbound connections",
+                                "key": "dfsr.params[RG,{#RGID},InConCount]",
+                                "delay": "900",
+                                "history": "7d",
+                                "description": "Number of inbound connections from partners within the replication group. Disabled connections are included.",
+                                "tags": [
+                                    {
+                                        "tag": "Application",
+                                        "value": "DFS Replication Connections"
+                                    },
+                                    {
+                                        "tag": "Application",
+                                        "value": "DFS Replication Groups"
+                                    }
+                                ]
+                            },
+                            {
+                                "uuid": "e580ccf784ef4df98d8a76a9868694d7",
+                                "name": "RG '{#RGNAME}': outbound connections",
+                                "key": "dfsr.params[RG,{#RGID},OutConCount]",
+                                "delay": "900",
+                                "history": "7d",
+                                "description": "Number of outbound connections to partners within the replication group. Disabled connections are included.",
+                                "tags": [
+                                    {
+                                        "tag": "Application",
+                                        "value": "DFS Replication Connections"
+                                    },
+                                    {
+                                        "tag": "Application",
+                                        "value": "DFS Replication Groups"
+                                    }
+                                ]
+                            },
+                            {
+                                "uuid": "1a925d7bbbe84522a453914f41fd3ecf",
+                                "name": "RG '{#RGNAME}': number of folders",
+                                "key": "dfsr.params[RG,{#RGID},RFCount]",
+                                "delay": "900",
+                                "history": "7d",
+                                "description": "Number of replicated folders of the replication group that are hosted on this computer",
+                                "tags": [
+                                    {
+                                        "tag": "Application",
+                                        "value": "DFS Replication Connections"
+                                    },
+                                    {
+                                        "tag": "Application",
+                                        "value": "DFS Replication Groups"
+                                    }
+                                ],
+                                "trigger_prototypes": [
+                                    {
+                                        "uuid": "5c1c88810b004c4da98fd22637a1b9de",
+                                        "expression": "last(/Template App DFS Replication/dfsr.params[RG,{#RGID},RFCount])=0",
+                                        "name": "RG '{#RGNAME}': no RFs found on this server",
+                                        "priority": "INFO"
+                                    },
+                                    {
+                                        "uuid": "41ceb3abec1b409cbab9fa6d757a4337",
+                                        "expression": "change(/Template App DFS Replication/dfsr.params[RG,{#RGID},RFCount])>0",
+                                        "name": "RG '{#RGNAME}': one or more RFs were added to this server",
+                                        "priority": "INFO"
+                                    },
+                                    {
+                                        "uuid": "9c2d9343db22416faa628e0171dad184",
+                                        "expression": "change(/Template App DFS Replication/dfsr.params[RG,{#RGID},RFCount])<0",
+                                        "name": "RG '{#RGNAME}': one or more RFs were removed from this server",
+                                        "priority": "WARNING"
+                                    }
+                                ]
+                            }
+                        ],
+                        "trigger_prototypes": [
+                            {
+                                "uuid": "f98c9a239681451ba475dccfe1ed8a71",
+                                "expression": "last(/Template App DFS Replication/dfsr.params[RG,{#RGID},InConCount])+last(/Template App DFS Replication/dfsr.params[RG,{#RGID},OutConCount])=0",
+                                "name": "RG '{#RGNAME}': no connections found for the group",
+                                "priority": "WARNING"
+                            }
+                        ]
+                    },
+                    {
+                        "uuid": "1988463ba5de4c1e928dad2cb0f7f9a8",
+                        "name": "DFS Replication Service Volumes PerfCounters LLD",
+                        "key": "dfsr.discovery[VolPerfCounter]",
+                        "delay": "3600",
+                        "status": "DISABLED",
+                        "lifetime": "1d",
+                        "enabled_lifetime_type": "DISABLE_NEVER",
+                        "item_prototypes": [
+                            {
+                                "uuid": "7c0240c0a11045c9999e64fec79a1357",
+                                "name": "Volume '{#RVNAME}': USN journal records read",
+                                "key": "perf_counter[\\{#RVPERFOBJECTID}({#RVNAME})\\{#RVPERFCOUNTER1ID}]",
+                                "delay": "60",
+                                "history": "7d",
+                                "description": "USN Journal Records Read shows the number of update sequence number (USN) journal records that were read by the DFS Replication service.",
+                                "tags": [
+                                    {
+                                        "tag": "Application",
+                                        "value": "DFS Replication Service Volumes"
+                                    },
+                                    {
+                                        "tag": "Application",
+                                        "value": "Performance"
+                                    }
+                                ]
+                            },
+                            {
+                                "uuid": "4462db3ac8ce49b892cd3dff7f05d9cc",
+                                "name": "Volume '{#RVNAME}': USN journal records accepted",
+                                "key": "perf_counter[\\{#RVPERFOBJECTID}({#RVNAME})\\{#RVPERFCOUNTER2ID}]",
+                                "delay": "60",
+                                "history": "7d",
+                                "description": "USN Journal Records Accepted shows the number of update sequence number (USN) journal records that were processed by the DFS Replication service. The DFS Replication service processes all USN journal records for replicated content on a volume and ignores records for non-replicated files and folders on the volume.",
+                                "tags": [
+                                    {
+                                        "tag": "Application",
+                                        "value": "DFS Replication Service Volumes"
+                                    },
+                                    {
+                                        "tag": "Application",
+                                        "value": "Performance"
+                                    }
+                                ]
+                            },
+                            {
+                                "uuid": "1343c0aef38d4ba5b6843ea128f1d2fb",
+                                "name": "Volume '{#RVNAME}': USN journal unread (percentage)",
+                                "key": "perf_counter[\\{#RVPERFOBJECTID}({#RVNAME})\\{#RVPERFCOUNTER3ID}]",
+                                "delay": "60",
+                                "history": "7d",
+                                "value_type": "FLOAT",
+                                "units": "%",
+                                "description": "USN Journal Unread Percentage shows the percent of the update sequence number (USN) journal that has not yet been read and processed by the DFS Replication service. A journal wrap will occur if this counter reaches 100.",
+                                "tags": [
+                                    {
+                                        "tag": "Application",
+                                        "value": "DFS Replication Service Volumes"
+                                    },
+                                    {
+                                        "tag": "Application",
+                                        "value": "Performance"
+                                    }
+                                ]
+                            },
+                            {
+                                "uuid": "457cac3da58e4397a9c4245eaba3bde4",
+                                "name": "Volume '{#RVNAME}': database commits",
+                                "key": "perf_counter[\\{#RVPERFOBJECTID}({#RVNAME})\\{#RVPERFCOUNTER4ID}]",
+                                "delay": "60",
+                                "history": "7d",
+                                "description": "Database Commits shows the number of database commit operations performed by the DFS Replication service. This counter indicates how intensive the DFS Replication service is from a database perspective.",
+                                "tags": [
+                                    {
+                                        "tag": "Application",
+                                        "value": "DFS Replication Service Volumes"
+                                    },
+                                    {
+                                        "tag": "Application",
+                                        "value": "Performance"
+                                    }
+                                ]
+                            },
+                            {
+                                "uuid": "3dbbade73ca54158be834c5df33231e9",
+                                "name": "Volume '{#RVNAME}': database lookups",
+                                "key": "perf_counter[\\{#RVPERFOBJECTID}({#RVNAME})\\{#RVPERFCOUNTER5ID}]",
+                                "delay": "60",
+                                "history": "7d",
+                                "description": "Database Lookups shows the number of database search operations performed by the DFS Replication service This counter indicates how intensive the DFS Replication service is from a database perspective.",
+                                "tags": [
+                                    {
+                                        "tag": "Application",
+                                        "value": "DFS Replication Service Volumes"
+                                    },
+                                    {
+                                        "tag": "Application",
+                                        "value": "Performance"
+                                    }
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        "uuid": "1e60ef292e0545b38d293608a2d6b3a3",
+                        "name": "DFS Replication Service Volumes LLD",
+                        "key": "dfsr.discovery[Volume]",
+                        "delay": "3600",
+                        "lifetime": "1d",
+                        "enabled_lifetime_type": "DISABLE_NEVER",
+                        "item_prototypes": [
+                            {
+                                "uuid": "19459aa1446f4c2e8d0bd40b602a32a8",
+                                "name": "Volume '{#VOLUMENAME}': state",
+                                "key": "dfsr.params[Volume,{#VOLUMEID},State]",
+                                "delay": "300",
+                                "history": "7d",
+                                "description": "The current volume state.\nInitialized (0)\nShutting Down (1)\nIn Error (2)\nAuto Recovery (3)",
+                                "valuemap": {
+                                    "name": "DFSR::VolumeState"
+                                },
+                                "tags": [
+                                    {
+                                        "tag": "Application",
+                                        "value": "DFS Replication Service Volumes"
+                                    }
+                                ],
+                                "trigger_prototypes": [
+                                    {
+                                        "uuid": "1966f769bf67413ab29dafa1a16b4d75",
+                                        "expression": "last(/Template App DFS Replication/dfsr.params[Volume,{#VOLUMEID},State])=3",
+                                        "name": "Volume '{#VOLUMENAME}': state became 'Auto Recovery'",
+                                        "priority": "AVERAGE"
+                                    },
+                                    {
+                                        "uuid": "3ceb04a717a1424c86e94711b9ea10a6",
+                                        "expression": "last(/Template App DFS Replication/dfsr.params[Volume,{#VOLUMEID},State])=2",
+                                        "name": "Volume '{#VOLUMENAME}': state became 'In Error'",
+                                        "priority": "HIGH"
+                                    }
+                                ]
+                            }
+                        ]
+                    }
+                ],
+                "macros": [
+                    {
+                        "macro": "{$BACKLOG_MAX_AVERAGE}",
+                        "value": "100"
+                    },
+                    {
+                        "macro": "{$BACKLOG_MAX_WARNING}",
+                        "value": "10"
+                    },
+                    {
+                        "macro": "{$BACKLOG_PERIOD}",
+                        "value": "15m"
+                    },
+                    {
+                        "macro": "{$CONFLICTDIRPFREE_MIN}",
+                        "value": "5"
+                    },
+                    {
+                        "macro": "{$CONFLICTSGENERATED_CHANGE_AVERAGE}",
+                        "value": "100"
+                    },
+                    {
+                        "macro": "{$CONFLICTSGENERATED_CHANGE_WARNING}",
+                        "value": "10"
+                    },
+                    {
+                        "macro": "{$CONFLICTSGENERATED_PERIOD}",
+                        "value": "5m"
+                    },
+                    {
+                        "macro": "{$DFSRLOGCRITICAL_MAX}",
+                        "value": "0"
+                    },
+                    {
+                        "macro": "{$DFSRLOGERRORS_MAX}",
+                        "value": "0"
+                    },
+                    {
+                        "macro": "{$DFSRLOGWARNINGS_MAX}",
+                        "value": "0"
+                    },
+                    {
+                        "macro": "{$DFSRLOG_PERIOD}",
+                        "value": "1h"
+                    },
+                    {
+                        "macro": "{$STAGEDIRPFREE_MIN}",
+                        "value": "5"
+                    }
+                ],
+                "valuemaps": [
+                    {
+                        "uuid": "92f41c5f1cff469b8d57f37b912b0213",
+                        "name": "DFSR::ConnectionState",
+                        "mappings": [
+                            {
+                                "value": "0",
+                                "newvalue": "Connecting"
+                            },
+                            {
+                                "value": "1",
+                                "newvalue": "Online"
+                            },
+                            {
+                                "value": "2",
+                                "newvalue": "Offline"
+                            },
+                            {
+                                "value": "3",
+                                "newvalue": "In Error"
+                            }
+                        ]
+                    },
+                    {
+                        "uuid": "0403d7e638ad448baf989e0f2f52808b",
+                        "name": "DFSR::RFState",
+                        "mappings": [
+                            {
+                                "value": "0",
+                                "newvalue": "Uninitialized"
+                            },
+                            {
+                                "value": "1",
+                                "newvalue": "Initialized"
+                            },
+                            {
+                                "value": "2",
+                                "newvalue": "Initial Sync"
+                            },
+                            {
+                                "value": "3",
+                                "newvalue": "Auto Recovery"
+                            },
+                            {
+                                "value": "4",
+                                "newvalue": "Normal"
+                            },
+                            {
+                                "value": "5",
+                                "newvalue": "In Error"
+                            }
+                        ]
+                    },
+                    {
+                        "uuid": "fbe4a6194fb14a5eab27e34b29a5c65a",
+                        "name": "DFSR::ServiceState",
+                        "mappings": [
+                            {
+                                "value": "0",
+                                "newvalue": "Starting"
+                            },
+                            {
+                                "value": "1",
+                                "newvalue": "Running"
+                            },
+                            {
+                                "value": "2",
+                                "newvalue": "Degraded"
+                            },
+                            {
+                                "value": "3",
+                                "newvalue": "Shutting Down"
+                            },
+                            {
+                                "value": "100",
+                                "newvalue": "Stopped"
+                            },
+                            {
+                                "value": "101",
+                                "newvalue": "Not Found"
+                            }
+                        ]
+                    },
+                    {
+                        "uuid": "3108b6ff446343aea85c1bc779ff0567",
+                        "name": "DFSR::VolumeState",
+                        "mappings": [
+                            {
+                                "value": "0",
+                                "newvalue": "Initialized"
+                            },
+                            {
+                                "value": "1",
+                                "newvalue": "Shutting Down"
+                            },
+                            {
+                                "value": "2",
+                                "newvalue": "In Error"
+                            },
+                            {
+                                "value": "3",
+                                "newvalue": "Auto Recovery"
+                            }
+                        ]
+                    },
+                    {
+                        "uuid": "78f5bc5f3f6d4ddbaadfa9db1e5fea2b",
+                        "name": "Service state",
+                        "mappings": [
+                            {
+                                "value": "0",
+                                "newvalue": "Down"
+                            },
+                            {
+                                "value": "1",
+                                "newvalue": "Up"
+                            }
+                        ]
+                    }
+                ]
+            }
+        ]
+    }
+}
